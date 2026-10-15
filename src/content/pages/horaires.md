@@ -39,11 +39,11 @@ saisons:
       - jour: Mardi
         messes:
           - heure: 18h
-            lieu: Le Bar-sur-Loup
-          - heure: 18h
             lieu: Le Rouret
       - jour: Mercredi
         messes:
+          - heure: 17h
+            lieu: Le Bar-sur-Loup
           - heure: 18h
             lieu: Châteauneuf-Grasse
       - jour: Jeudi
@@ -54,8 +54,6 @@ saisons:
         messes:
           - heure: 9h
             lieu: Roquefort-les-Pins
-          - heure: 18h
-            lieu: Pont-du-Loup
   ete:
     titre: Horaires d'été
     periode: de fin mars à fin octobre
@@ -84,12 +82,12 @@ saisons:
       - jour: Lundi
       - jour: Mardi
         messes:
-          - heure: 18h
-            lieu: Le Bar-sur-Loup
           - heure: 18h30
             lieu: Le Rouret
       - jour: Mercredi
         messes:
+          - heure: 18h
+            lieu: Le Bar-sur-Loup
           - heure: 18h30
             lieu: Châteauneuf-Grasse
       - jour: Jeudi
@@ -100,17 +98,13 @@ saisons:
         messes:
           - heure: 9h
             lieu: Roquefort-les-Pins
-          - heure: 18h
-            lieu: Pont-du-Loup
 
 devotions:
   - titre: Adoration du Saint-Sacrement
     lignes:
       - Tous les jeudis après la messe à Opio, jusqu'à 22h
-      - Un vendredi sur deux après la messe de 18h à Pont-du-Loup
   - titre: Chapelet
     lignes:
-      - Un vendredi sur deux avant la messe de 18h à Pont-du-Loup
       - Tous les vendredis après la messe de 9h à Roquefort-les-Pins
 
 prochaines:
