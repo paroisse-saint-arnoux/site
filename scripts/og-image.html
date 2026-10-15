@@ -1,0 +1,103 @@
+<!doctype html>
+<!--
+  Modèle de l'image de partage (Open Graph) : public/og-image.jpg, 1200 × 630.
+  Pour la régénérer (photo, logo ou textes modifiés) : bash scripts/og-image.sh
+-->
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'Cormorant Garamond';
+        font-weight: 600;
+        src: url('../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Source Sans 3';
+        font-weight: 200 900;
+        src: url('../node_modules/@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2') format('woff2');
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        background: #faf6ef;
+        color: #2a2521;
+        font-family: 'Source Sans 3', sans-serif;
+      }
+
+      .photo {
+        height: 460px;
+        background: url('../src/assets/photos/pretres-enfants-de-choeur.jpg') center 15% / cover no-repeat;
+        border-bottom: 6px solid #b5832a;
+      }
+
+      .band {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        padding: 0 56px;
+      }
+
+      .band img {
+        width: 124px;
+        height: 124px;
+        margin-top: -60px;
+        padding: 8px;
+        background: #faf6ef;
+        border-radius: 50%;
+        box-shadow: 0 4px 18px rgb(42 37 33 / 25%);
+      }
+
+      .text {
+        flex: 1;
+      }
+
+      h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: 58px;
+        line-height: 1;
+        color: #1f3a5c;
+      }
+
+      p {
+        margin-top: 10px;
+        font-size: 23px;
+        color: #5f564e;
+      }
+
+      .domain {
+        align-self: flex-end;
+        margin-bottom: 30px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #b5832a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="photo"></div>
+    <div class="band">
+      <img src="../src/assets/logo/Logo carre Saint Arnoux.svg" alt="" />
+      <div class="text">
+        <h1>Paroisse Saint Arnoux</h1>
+        <p>Paroisse catholique · Roquefort-les-Pins, Le Rouret, Opio, Le Bar-sur-Loup…</p>
+      </div>
+      <span class="domain">saint-arnoux.fr</span>
+    </div>
+  </body>
+</html>

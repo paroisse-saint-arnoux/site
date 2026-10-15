@@ -42,6 +42,7 @@ Dans l'en-tête, mettre une phrase entre guillemets si elle contient « : ». Po
 - Dans `agenda.yml`, `messe: true` fait apparaître un événement dans « Messes et célébrations particulières » (page Horaires), et les rubriques `accueil: true` alimentent « Prochains rendez-vous » sur l'accueil. Les dates passées sont grisées ou masquées automatiquement dans le navigateur, sans avoir à reconstruire le site. Une erreur de saisie (date mal écrite, champ manquant) fait échouer `npm run build` avec un message indiquant la ligne en cause.
 - Livret de l'année : remplacer `public/livret-paroissial-2026-2027.pdf` (et `livret` dans `site.ts`).
 - Photos : `src/assets/photos/` ; elles sont redimensionnées et converties en WebP au build.
+- Image de partage (aperçu Facebook, WhatsApp…) : `public/og-image.jpg`, générée à partir de `scripts/og-image.html`. Après avoir changé la photo d'accueil ou le logo, la régénérer avec `bash scripts/og-image.sh` (nécessite Chrome et ImageMagick).
 
 ## Installation, configuration et publication
 
