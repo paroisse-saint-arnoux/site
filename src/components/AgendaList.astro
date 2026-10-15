@@ -1,0 +1,120 @@
+---
+import type { AgendaItem } from '../data/agenda';
+import { dayNumber, formatDate, itemDetails, monthShort } from '../lib/dates';
+
+interface Props {
+  items: AgendaItem[];
+  /** Masque automatiquement (côté navigateur) les dates passées */
+  hidePast?: boolean;
+  /** Nombre maximum de dates affichées (après masquage des dates passées) */
+  limit?: number;
+  withYear?: boolean;
+}
+
+const { items, hidePast = false, limit, withYear = false } = Astro.props;
+---
+
+<ol class="agenda-list" data-hide-past={hidePast ? '' : undefined} data-limit={limit}>
+  {
+    items.map((item, i) => (
+      <li data-date={item.end ?? item.date} hidden={limit !== undefined && i >= limit}>
+        <span class="tile" aria-hidden="true">
+          <span class="d">{dayNumber(item.date)}</span>
+          <span class="m">{monthShort(item.date)}</span>
+        </span>
+        <span class="body">
+          <span class="when">{formatDate(item, withYear)}</span>
+          <span class="what">{item.title}</span>
+          {itemDetails(item) && <span class="where">{itemDetails(item)}</span>}
+        </span>
+      </li>
+    ))
+  }
+</ol>
+
+<script>
+  // Grise les dates passées (ou les masque si data-hide-past) à la date du jour.
+  const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' }).format(new Date());
+  document.querySelectorAll<HTMLOListElement>('.agenda-list').forEach((list) => {
+    const hide = list.hasAttribute('data-hide-past');
+    const limit = list.dataset.limit ? Number(list.dataset.limit) : Infinity;
+    let shown = 0;
+    list.querySelectorAll<HTMLLIElement>('li[data-date]').forEach((li) => {
+      const past = (li.dataset.date ?? '') < today;
+      if (past && !hide) li.classList.add('past');
+      li.hidden = (past && hide) || shown >= limit;
+      if (!li.hidden) shown++;
+    });
+  });
+</script>
+
+<style>
+  .agenda-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  li {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  li[hidden] {
+    display: none;
+  }
+
+  li.past {
+    opacity: 0.45;
+  }
+
+  .tile {
+    flex: none;
+    width: 52px;
+    height: 56px;
+    border-radius: 8px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    display: grid;
+    place-content: center;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .d {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--blue-dark);
+  }
+
+  .m {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--terracotta);
+    font-weight: 600;
+  }
+
+  .body {
+    display: grid;
+    line-height: 1.35;
+  }
+
+  .when {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .what {
+    font-weight: 600;
+  }
+
+  .where {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+</style>

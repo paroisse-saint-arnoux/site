@@ -1,0 +1,20 @@
+---
+// Affiche un court texte Markdown venant de l'en-tête (front matter) d'un
+// fichier de src/content/. Les liens externes s'ouvrent dans un nouvel onglet.
+import { marked } from 'marked';
+
+interface Props {
+  text?: string;
+  inline?: boolean;
+}
+
+const { text, inline = false } = Astro.props;
+const html = text
+  ? String(inline ? marked.parseInline(text) : marked.parse(text)).replace(
+      /<a href="(https?:[^"]+)"/g,
+      '<a href="$1" target="_blank" rel="noopener"',
+    )
+  : '';
+---
+
+{html && <Fragment set:html={html} />}

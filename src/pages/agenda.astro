@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import AgendaList from '../components/AgendaList.astro';
+import Icon from '../components/Icon.astro';
+import { agenda, year } from '../data/agenda';
+import { livret } from '../data/site';
+import { getPage } from '../lib/content';
+
+const { data: page } = await getPage('agenda');
+---
+
+<Base title={`Agenda ${year}`} description={page.description}>
+  <PageHeader eyebrow={page.surtitre} title={page.titre} lead={page.intro}>
+    <div class="actions">
+      <a class="btn" href={livret.url}><Icon name="Download" /> {page.bouton_livret}</a>
+    </div>
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="chips" aria-label="Rubriques de l'agenda">
+        {agenda.map((s) => <a href={`#${s.id}`}>{s.title}</a>)}
+      </nav>
+      <div class="sections">
+        {
+          agenda.map((s) => (
+            <section class="card" id={s.id}>
+              <h2>{s.title}</h2>
+              {s.intro && <p class="muted">{s.intro}</p>}
+              <AgendaList items={s.items} withYear />
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .chips a {
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+
+  .chips a:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .sections {
+    columns: 2 380px;
+    column-gap: 24px;
+  }
+
+  .sections > section {
+    break-inside: avoid;
+    margin-bottom: 24px;
+    scroll-margin-top: 90px;
+  }
+
+  .sections h2 {
+    font-size: 1.7rem;
+  }
+</style>

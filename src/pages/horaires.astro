@@ -1,0 +1,317 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import AgendaList from '../components/AgendaList.astro';
+import Icon from '../components/Icon.astro';
+import { agenda } from '../data/agenda';
+import { channels } from '../data/site';
+import { todayIso } from '../lib/dates';
+import photo from '../assets/photos/messe-bougies.jpg';
+import { getPage } from '../lib/content';
+
+const { data: page, Content } = await getPage('horaires');
+const seasons = (['hiver', 'ete'] as const).map((id) => ({ id, ...page.saisons[id] }));
+
+const today = todayIso();
+const special = agenda
+  .flatMap((s) => s.items)
+  .filter((item) => item.messe && (item.end ?? item.date) >= today)
+  .filter((item, i, all) => all.findIndex((o) => o.date === item.date && o.title === item.title) === i)
+  .sort((a, b) => a.date.localeCompare(b.date));
+
+// Heure d'été à Paris au moment du build (affinée ensuite dans le navigateur)
+const isSummer = (date: Date) =>
+  new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', timeZoneName: 'short' }).format(date).includes('+2');
+const current = isSummer(new Date()) ? 'ete' : 'hiver';
+---
+
+<Base title={page.titre} description={page.description}>
+  <PageHeader
+    eyebrow={page.surtitre}
+    title={page.titre}
+    lead={page.intro}
+    image={photo}
+    imageAlt={page.photo}
+    position="center 60%"
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid--2 seasons" data-current={current}>
+        {
+          seasons.map((season) => (
+            <article class="card season" data-season={season.id}>
+              <header>
+                <span class="season-icon">
+                  <Icon name={season.id === 'ete' ? 'Sun' : 'Snowflake'} size={22} />
+                </span>
+                <div>
+                  <h2>{season.titre}</h2>
+                  <p class="muted small">{season.periode}</p>
+                </div>
+                <span class="badge">{page.en_ce_moment}</span>
+              </header>
+              <dl>
+                {season.jours.map((d: any) => (
+                  <div class="day">
+                    <dt>{d.jour}</dt>
+                    <dd>
+                      <ul>
+                        {d.messes.map((s: any) => (
+                          <li>
+                            <strong>{s.heure}</strong> {s.lieu}
+                            {s.precision && <span class="muted"> – {s.precision}</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                ))}
+                <div class="day">
+                  <dt>Lundi</dt>
+                  <dd class="muted">{page.lundi}</dd>
+                </div>
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="grid grid--2 devotions">
+        {
+          page.devotions.map((d: any) => (
+            <div class="card">
+              <h3>{d.titre}</h3>
+              <ul>
+                {d.lignes.map((i: string) => (
+                  <li>{i}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="wrap">
+      <span class="eyebrow">{page.prochaines.surtitre}</span>
+      <h2>{page.prochaines.titre}</h2>
+      <p class="lead">{page.prochaines.intro}</p>
+      <div class="card messes-info">
+        <div class="EgliseInfo-container">
+          <div data-egliseinfo="communaute" data-communityid="nc/06/saint-pierre-du-brusc" data-open-in-egliseinfo="true"></div>
+          <script is:inline type="text/javascript" language="javascript" src="https://messes.info//Widget/Widget.nocache.js"></script>
+          <noscript>
+            <p>{page.prochaines.sans_javascript}</p>
+          </noscript>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid--2 special">
+      <div>
+        <span class="eyebrow">{page.particulieres.surtitre}</span>
+        <h2>{page.particulieres.titre}</h2>
+        <Content />
+        <div class="actions">
+          <a class="btn" href="/restez-informes/">{page.particulieres.bouton_annonces}</a>
+          <a class="btn btn--ghost" href={channels.facebook} target="_blank" rel="noopener"><Icon name="facebook" /> Facebook</a>
+        </div>
+      </div>
+      <div class="card">
+        {special.length ? <AgendaList items={special} hidePast withYear /> : <p>{page.particulieres.aucune}</p>}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const summer = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', timeZoneName: 'short' })
+    .format(new Date())
+    .includes('+2');
+  const grid = document.querySelector<HTMLElement>('.seasons');
+  if (grid) grid.dataset.current = summer ? 'ete' : 'hiver';
+</script>
+
+<style>
+  /* Horaires d'été / d'hiver */
+  .season header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .season h2 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+
+  .season header p {
+    margin: 0;
+  }
+
+  .season-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--paper-2);
+    color: var(--ochre);
+  }
+
+  .badge {
+    display: none;
+    margin-left: auto;
+    background: var(--green);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  [data-current='ete'] [data-season='ete'],
+  [data-current='hiver'] [data-season='hiver'] {
+    order: -1;
+    border: 2px solid var(--green);
+  }
+
+  [data-current='ete'] [data-season='ete'] .badge,
+  [data-current='hiver'] [data-season='hiver'] .badge {
+    display: inline-block;
+  }
+
+  [data-current='ete'] [data-season='hiver'],
+  [data-current='hiver'] [data-season='ete'] {
+    opacity: 0.8;
+  }
+
+  dl {
+    margin: 0;
+  }
+
+  .day {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  dt {
+    font-weight: 700;
+    color: var(--blue-dark);
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  dd ul,
+  .devotions ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  dd li + li {
+    margin-top: 4px;
+  }
+
+  .devotions {
+    margin-top: 24px;
+  }
+
+  .devotions li {
+    padding-left: 1.2em;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .devotions li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--ochre);
+    font-size: 0.8em;
+    top: 0.2em;
+  }
+
+  @media (max-width: 420px) {
+    .day {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+  }
+
+  /* Widget messes.info */
+  .messes-info {
+    min-height: 240px;
+    overflow-x: auto;
+  }
+
+  /* Éléments du widget masqués : coordonnées, titres, messages et date de mise à jour */
+  .messes-info :global(div:has(> #infos-pratique)),
+  .messes-info :global(div.titleMarginHoraire),
+  .messes-info :global(div.searchCelebrationTimeMessage),
+  .messes-info :global(div.alignTitleAndButtons),
+  .messes-info :global(div.infos-pratique-mise-a-jour),
+  .messes-info :global(.egliseInfoCellListActions),
+  .messes-info :global(.egliseInfoCellTreeHead) {
+    display: none !important;
+  }
+
+  .messes-info :global(.egliseInfoCell) {
+    border-top: none !important;
+  }
+
+  .messes-info :global(.gwt-TabBar) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-bottom: 0.5rem;
+  }
+
+  .messes-info :global(.gwt-TabBarItem) {
+    padding: 6px 14px;
+    margin-right: 6px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .messes-info :global(.gwt-TabBarItem-selected) {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+
+  .messes-info :global(a) {
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 560px) {
+    .messes-info {
+      padding: 14px 10px;
+    }
+  }
+
+  .source {
+    margin: 1.5rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  .special {
+    align-items: start;
+  }
+</style>

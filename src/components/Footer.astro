@@ -1,0 +1,107 @@
+---
+import Icon from './Icon.astro';
+import { channels, contact, livret, permanences, site } from '../data/site';
+---
+
+<footer class="footer">
+  <div class="wrap cols">
+    <div>
+      <h2>Paroisse Saint Arnoux</h2>
+      <p>
+        {contact.place}<br />
+        {contact.street}<br />
+        {contact.city}
+      </p>
+      <p>
+        <a href={contact.phoneHref}>{contact.phone}</a><br />
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+      </p>
+    </div>
+    <div>
+      <h2>Permanences d'accueil</h2>
+      <ul class="plain">
+        {permanences.map((p) => <li><strong>{p.day}</strong> : {p.slots.join(' et ')}</li>)}
+      </ul>
+      <p class="small">Hors jours fériés et vacances scolaires.</p>
+    </div>
+    <div>
+      <h2>Restez informés</h2>
+      <ul class="plain social">
+        <li><a href="/restez-informes/#newsletter"><Icon name="Mail" /> Newsletter</a></li>
+        <li><a href={channels.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" /> Communauté WhatsApp</a></li>
+        <li><a href={channels.facebook} target="_blank" rel="noopener"><Icon name="facebook" /> Facebook</a></li>
+        <li><a href={livret.url}><Icon name="Download" /> {livret.title} (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap villages">
+    {site.villages.join(' · ')}
+  </div>
+  <div class="wrap legal">
+    <span>© {new Date().getFullYear()} {site.name} – Diocèse de Nice</span>
+    <a href="/mentions-legales/">Mentions légales</a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--blue-dark);
+    color: #dfe6ee;
+    padding-top: 48px;
+    margin-top: 0;
+  }
+
+  .footer a {
+    color: #fff;
+  }
+
+  .footer a:hover {
+    color: #f3d79b;
+  }
+
+  .footer h2 {
+    color: #fff;
+    font-size: 1.4rem;
+  }
+
+  .cols {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  }
+
+  .plain {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1em;
+  }
+
+  .social li {
+    margin-bottom: 6px;
+  }
+
+  .social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .villages {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(255 255 255 / 15%);
+    font-size: 0.9rem;
+    color: #b7c4d3;
+  }
+
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    padding-block: 20px 28px;
+    font-size: 0.85rem;
+    color: #b7c4d3;
+  }
+</style>

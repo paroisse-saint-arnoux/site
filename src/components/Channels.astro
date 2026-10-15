@@ -1,0 +1,65 @@
+---
+import Icon from './Icon.astro';
+import { channels } from '../data/site';
+import { getPage } from '../lib/content';
+
+const { canaux } = (await getPage('restez-informes')).data;
+---
+
+<div class="grid grid--3 channels">
+  <a class="card channel" href="/restez-informes/#newsletter">
+    <span class="logo" style="--c: #b5832a"><Icon name="Mail" size={26} /></span>
+    <h3>{canaux.newsletter.titre}</h3>
+    <p>{canaux.newsletter.texte}</p>
+    <span class="more">{canaux.newsletter.lien}</span>
+  </a>
+  <a class="card channel" href={channels.whatsapp} target="_blank" rel="noopener">
+    <span class="logo" style="--c: #25d366"><Icon name="whatsapp" size={26} /></span>
+    <h3>{canaux.whatsapp.titre}</h3>
+    <p>{canaux.whatsapp.texte}</p>
+    <span class="more">{canaux.whatsapp.lien}</span>
+  </a>
+  <a class="card channel" href={channels.facebook} target="_blank" rel="noopener">
+    <span class="logo" style="--c: #0866ff"><Icon name="facebook" size={26} /></span>
+    <h3>{canaux.facebook.titre}</h3>
+    <p>{canaux.facebook.texte}</p>
+    <span class="more">{canaux.facebook.lien}</span>
+  </a>
+</div>
+
+<style>
+  .channel {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .channel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgb(42 37 33 / 12%);
+    color: var(--ink);
+  }
+
+  .channel p {
+    color: var(--ink-soft);
+    flex: 1;
+  }
+
+  .logo {
+    display: inline-grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--c);
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  .more {
+    font-weight: 600;
+    color: var(--blue);
+  }
+</style>

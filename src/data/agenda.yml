@@ -1,0 +1,411 @@
+# ---------------------------------------------------------------------------
+# Calendrier pastoral 2026-2027 (repris du livret paroissial)
+#
+# Chaque rubrique contient :
+#   id       identifiant court, sans espace ni accent (sert aux liens #id)
+#   titre    titre affiché
+#   intro    (facultatif) texte d'introduction
+#   accueil  (facultatif) true = les dates apparaissent dans
+#            « Prochains rendez-vous » sur la page d'accueil
+#   dates    la liste des dates de la rubrique
+#
+# Chaque date contient :
+#   date     jour au format AAAA-MM-JJ, par ex. 2026-12-24
+#   fin      (facultatif) dernier jour, pour un événement sur plusieurs jours
+#   titre    ce qui se passe
+#   heure    (facultatif) par ex. 10h30
+#   lieu     (facultatif) par ex. Le Rouret
+#   messe    (facultatif) true = l'événement apparaît aussi dans
+#            « Messes et célébrations particulières » (page Horaires)
+#
+# Attention à l'indentation (2 espaces, jamais de tabulation). Si un titre
+# contient le caractère « : », mettez-le entre guillemets.
+# Les dates passées sont grisées ou masquées automatiquement sur le site.
+# ---------------------------------------------------------------------------
+
+annee: 2026-2027
+
+rubriques:
+  - id: temps-forts
+    titre: Dates importantes
+    accueil: true
+    dates:
+      - date: 2026-09-12
+        titre: Pèlerinage à la croix de Verse
+      - date: 2026-09-20
+        titre: Rentrée pastorale paroissiale – Journée des bâtisseurs
+      - date: 2026-10-11
+        titre: Fête patronale de la sainte Réparate – Diocèse de Nice
+      - date: 2026-11-29
+        titre: Kermesse paroissiale
+        lieu: Roquefort-les-Pins
+      - date: 2027-01-17
+        titre: Tradition des catéchumènes
+      - date: 2027-02-10
+        titre: Mercredi des Cendres
+        messe: true
+      - date: 2027-02-14
+        titre: Saint-Valentin – Messe des amoureux
+        heure: 10h30
+        lieu: Roquefort-les-Pins
+        messe: true
+      - date: 2027-02-28
+        titre: Scrutin des catéchumènes
+      - date: 2027-03-07
+        titre: Scrutin des catéchumènes
+      - date: 2027-03-14
+        titre: Scrutin des catéchumènes
+      - date: 2027-03-22
+        fin: 2027-03-27
+        titre: Semaine sainte
+      - date: 2027-03-25
+        titre: Jeudi saint – Sainte Cène (lavement des pieds)
+        heure: 18h
+        lieu: Le Rouret
+        messe: true
+      - date: 2027-03-27
+        titre: Vigile pascale
+        heure: 21h
+        lieu: Châteauneuf-Grasse
+        messe: true
+      - date: 2027-03-28
+        titre: Pâques
+        messe: true
+      - date: 2027-04-11
+        titre: Confirmation des adultes
+        lieu: Mandelieu
+      - date: 2027-05-06
+        titre: Ascension du Seigneur
+        messe: true
+      - date: 2027-05-16
+        titre: Pentecôte
+        messe: true
+      - date: 2027-05-22
+        titre: Confirmation des jeunes
+        heure: 15h
+        lieu: Cathédrale de Grasse
+      - date: 2027-06-20
+        titre: "Fête de fin d'année – Journée des bâtisseurs"
+
+  - id: messes-des-familles
+    titre: Messes des familles
+    intro: Communes au catéchisme et à l’aumônerie.
+    accueil: true
+    dates:
+      - date: 2026-09-20
+        titre: Messe de la rentrée paroissiale
+        heure: 10h30
+        messe: true
+      - date: 2026-11-22
+        titre: Messe des familles
+        heure: 10h30
+        lieu: Roquefort-les-Pins
+        messe: true
+      - date: 2026-12-24
+        titre: Messe de Noël des familles
+        heure: 17h
+        lieu: Le Rouret
+        messe: true
+      - date: 2027-01-31
+        titre: Messe des familles
+        heure: 10h30
+        lieu: Roquefort-les-Pins
+        messe: true
+      - date: 2027-05-29
+        titre: Messe des familles
+        heure: 18h30
+        lieu: Le Rouret
+        messe: true
+      - date: 2027-06-20
+        titre: "Messe de fin d'année en plein air, suivie d'un repas festif"
+        messe: true
+
+  - id: catechisme
+    titre: Catéchisme
+    intro: Un samedi par mois au Rouret, au Centre Saint Joseph (de 10h à 17h pour les CE2, CM1 et CM2 ; de 13h30 à 17h pour les CP et CE1), avec la messe à 16h. Ou tous les jeudis après l’école au Bar-sur-Loup.
+    dates:
+      - date: 2026-09-26
+        titre: Rencontre
+      - date: 2026-10-10
+        titre: Rencontre
+      - date: 2026-11-07
+        titre: Rencontre
+      - date: 2026-12-05
+        titre: Rencontre
+      - date: 2027-01-09
+        titre: Rencontre
+      - date: 2027-02-13
+        titre: Rencontre
+      - date: 2027-03-20
+        titre: Rencontre
+      - date: 2027-04-10
+        titre: Rencontre
+      - date: 2027-05-15
+        titre: Rencontre
+      - date: 2027-06-12
+        titre: Rencontre
+      - date: 2027-06-20
+        titre: "Fête de fin d'année"
+
+  - id: premieres-communions
+    titre: Premières communions
+    dates:
+      - date: 2027-04-17
+        fin: 2027-04-18
+        titre: Retraite
+        lieu: Notre-Dame de Laghet
+      - date: 2027-05-06
+        titre: Premières communions (Ascension)
+        heure: 10h30
+        lieu: Châteauneuf-Grasse
+        messe: true
+      - date: 2027-05-23
+        titre: Premières communions
+        heure: 10h30
+        lieu: Roquefort-les-Pins
+        messe: true
+      - date: 2027-05-30
+        titre: Premières communions
+        heure: 10h30
+        lieu: Le Bar-sur-Loup
+        messe: true
+
+  - id: eveil-a-la-foi
+    titre: Éveil à la foi
+    intro: Pour les plus petits, le dimanche de 10h30 à 11h30 à Roquefort-les-Pins, pendant la messe.
+    dates:
+      - date: 2026-10-04
+        titre: Rencontre
+      - date: 2026-11-22
+        titre: Rencontre
+      - date: 2027-01-31
+        titre: Rencontre
+      - date: 2027-02-14
+        titre: Rencontre
+      - date: 2027-03-14
+        titre: Rencontre
+      - date: 2027-05-09
+        titre: Rencontre
+      - date: 2027-06-20
+        titre: "Fête de fin d'année"
+
+  - id: aumonerie
+    titre: Aumônerie
+    intro: Pour les collégiens, de la 6e à la 3e.
+    dates:
+      - date: 2026-09-26
+        titre: Rencontre hors les murs
+      - date: 2026-10-10
+        titre: Sortie pour les 6e et 5e – Cap Montagne pour les 4e et 3e
+      - date: 2026-11-14
+        titre: Rencontre
+      - date: 2026-12-12
+        titre: Rencontre
+      - date: 2027-01-16
+        titre: Rencontre
+      - date: 2027-02-06
+        titre: Rencontre
+      - date: 2027-03-13
+        titre: Rencontre
+      - date: 2027-04-03
+        titre: Rencontre
+      - date: 2027-05-29
+        titre: Rencontre
+      - date: 2027-06-20
+        titre: "Fête de fin d'année"
+
+  - id: confirmation
+    titre: Confirmation
+    dates:
+      - date: 2027-05-01
+        fin: 2027-05-02
+        titre: Retraite
+        lieu: Notre-Dame de Laghet
+      - date: 2027-05-11
+        titre: "Rencontre avec l'évêque"
+        heure: 18h
+        lieu: Cathédrale de Grasse
+      - date: 2027-05-22
+        titre: Messe de confirmation
+        heure: 15h
+        lieu: Cathédrale de Grasse
+        messe: true
+
+  - id: profession-de-foi
+    titre: Profession de foi
+    intro: Préparation le dimanche de 9h à 10h30, avant la messe, à Roquefort-les-Pins.
+    dates:
+      - date: 2027-06-19
+        titre: Profession de foi
+        heure: 21h
+        lieu: Notre-Dame du Brusc
+        messe: true
+      - date: 2027-06-20
+        titre: "Messe d'action de grâce"
+        messe: true
+
+  - id: servants
+    titre: "Servants d'autel et servantes de l'assemblée"
+    dates:
+      - date: 2026-09-20
+        titre: Rencontre (rentrée paroissiale)
+      - date: 2026-11-22
+        titre: Rencontre
+      - date: 2027-01-24
+        titre: Rencontre
+      - date: 2027-03-14
+        titre: Rencontre
+      - date: 2027-03-25
+        titre: Sainte Cène
+        heure: 18h
+        lieu: Le Rouret
+      - date: 2027-03-27
+        titre: Vigile pascale
+        heure: 21h
+        lieu: Châteauneuf-Grasse
+      - date: 2027-05-29
+        titre: "Sortie festive de fin d'année (14h – 19h30), avec messe au Rouret"
+      - date: 2027-06-20
+        titre: "Fête de fin d'année"
+
+  - id: mariage
+    titre: Préparation au mariage
+    intro: Les jeudis de 20h à 22h.
+    dates:
+      - date: 2026-10-16
+        titre: Soirée couples
+      - date: 2026-11-05
+        titre: Avant le mariage
+      - date: 2026-11-12
+        titre: Après le mariage
+      - date: 2026-12-03
+        titre: Après le mariage
+      - date: 2026-12-10
+        titre: Avant le mariage
+      - date: 2027-01-14
+        titre: Avant le mariage
+      - date: 2027-01-21
+        titre: Après le mariage
+      - date: 2027-02-12
+        titre: Soirée couples – Saint-Valentin autrement
+      - date: 2027-02-14
+        titre: Dimanche des amoureux
+        heure: 10h30
+        lieu: Roquefort-les-Pins
+      - date: 2027-03-13
+        titre: Journée des fiancés
+        lieu: Antibes
+      - date: 2027-03-18
+        titre: Avant le mariage
+      - date: 2027-04-08
+        titre: Avant le mariage
+      - date: 2027-05-13
+        titre: Avant le mariage
+
+  - id: priere
+    titre: Groupe de prière « Le Vent du Saint-Esprit »
+    intro: "Le 3e mardi du mois à Saint-Pons (Le Rouret) : 19h en hiver, 19h30 en été."
+    dates:
+      - date: 2026-09-22
+        titre: Groupe de prière
+      - date: 2026-10-13
+        titre: Groupe de prière
+      - date: 2026-11-10
+        titre: Groupe de prière
+      - date: 2026-12-15
+        titre: Groupe de prière
+      - date: 2027-01-20
+        titre: Groupe de prière (mercredi)
+      - date: 2027-02-23
+        titre: Groupe de prière
+      - date: 2027-03-16
+        titre: Groupe de prière
+      - date: 2027-04-20
+        titre: Groupe de prière
+      - date: 2027-05-18
+        titre: Groupe de prière
+      - date: 2027-06-15
+        titre: Groupe de prière
+      - date: 2027-07-20
+        titre: Groupe de prière
+
+  - id: formations
+    titre: Formations
+    intro: Au Centre Saint Joseph, au Rouret.
+    dates:
+      - date: 2026-10-20
+        titre: "L'église, un livre de pierre : « Une heure, une œuvre »"
+        heure: 19h30
+      - date: 2026-11-17
+        titre: Formation liturgique
+        heure: 20h
+      - date: 2026-11-24
+        titre: "L'église, un livre de pierre : introduction à l'architecture sacrée"
+        heure: 19h30
+      - date: 2026-12-01
+        titre: "L'église, un livre de pierre : « Une heure, une œuvre »"
+        heure: 19h30
+      - date: 2027-01-12
+        titre: Parcours « Repères pour croire »
+        heure: 19h30
+      - date: 2027-01-19
+        titre: Formation liturgique
+        heure: 20h
+      - date: 2027-01-26
+        titre: Parcours « Repères pour croire »
+        heure: 19h30
+      - date: 2027-02-02
+        titre: Parcours « Repères pour croire »
+        heure: 19h30
+      - date: 2027-02-09
+        titre: Parcours « Repères pour croire »
+        heure: 19h30
+      - date: 2027-02-16
+        titre: Parcours « Repères pour croire »
+        heure: 19h30
+      - date: 2027-03-09
+        titre: Parcours « Repères pour croire »
+        heure: 19h30
+      - date: 2027-04-04
+        titre: "Sortie de l'équipe liturgique (toute la journée)"
+
+  - id: kermesse
+    titre: Kermesse paroissiale
+    intro: Le dimanche 29 novembre 2026 à Roquefort-les-Pins. Toutes les bonnes volontés sont les bienvenues aux réunions de préparation, au Centre Saint Joseph.
+    dates:
+      - date: 2026-10-07
+        titre: Réunion de préparation
+        heure: 19h30
+      - date: 2026-11-11
+        titre: Réunion de préparation
+        heure: 19h
+      - date: 2026-11-29
+        titre: Kermesse paroissiale
+        lieu: Roquefort-les-Pins
+
+  - id: equipes
+    titre: "Équipes d'animation"
+    intro: Le mercredi à 20h au Centre Saint Joseph.
+    dates:
+      - date: 2026-09-02
+        titre: Équipe « Vision »
+      - date: 2026-09-09
+        titre: "Équipe d'animation pastorale (EAP)"
+      - date: 2026-10-14
+        titre: Équipe « Vision »
+      - date: 2026-11-04
+        titre: EAP – préparation de l’Avent et de Noël
+      - date: 2026-12-09
+        titre: Équipe « Vision »
+      - date: 2027-01-06
+        titre: EAP
+      - date: 2027-02-03
+        titre: Équipe « Vision »
+      - date: 2027-03-10
+        titre: EAP
+      - date: 2027-04-07
+        titre: Équipe « Vision »
+      - date: 2027-05-12
+        titre: EAP
+      - date: 2027-06-16
+        titre: Équipe « Vision »

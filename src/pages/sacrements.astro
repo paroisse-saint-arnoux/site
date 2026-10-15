@@ -1,0 +1,167 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import Markdown from '../components/Markdown.astro';
+import { getOrdered, getPage, render } from '../lib/content';
+import photo from '../assets/photos/consecration.jpg';
+
+const { data: page, Content } = await getPage('sacrements');
+const cards = await Promise.all(
+  (await getOrdered('sacrements')).map(async (entry) => ({
+    id: entry.id,
+    ...entry.data,
+    Content: (await render(entry)).Content,
+  })),
+);
+const isExternal = (href: string) => /^https?:/.test(href);
+---
+
+<Base title={page.titre} description={page.description}>
+  <PageHeader
+    eyebrow={page.surtitre}
+    title={page.titre}
+    lead={page.intro}
+    image={photo}
+    imageAlt={page.photo}
+    position="center 35%"
+  />
+
+  <section class="section">
+    <div class="wrap grid sacs">
+      {
+        cards.map((c) => (
+          <article class="card sac" id={c.id}>
+            <span class="ico">
+              <Icon name={c.icone} size={24} />
+            </span>
+            <h2>{c.titre}</h2>
+            <div class="texte">
+              <c.Content />
+            </div>
+            {c.boutons.length > 0 && (
+              <div class="actions">
+                {c.boutons.map((b) =>
+                  isExternal(b.lien) ? (
+                    <a class:list={['btn', { 'btn--ghost': b.secondaire }]} href={b.lien} target="_blank" rel="noopener">
+                      {b.texte} <Icon name="ExternalLink" />
+                    </a>
+                  ) : (
+                    <a class:list={['btn', { 'btn--ghost': b.secondaire }]} href={b.lien}>
+                      {b.texte}
+                    </a>
+                  ),
+                )}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="wrap">
+      <div class="note other">
+        <Markdown text={page.autres} inline />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="wrap grid grid--2 casuel">
+      <div>
+        <span class="eyebrow">{page.casuel.surtitre}</span>
+        <h2>{page.casuel.titre}</h2>
+        <Content />
+      </div>
+      <div class="card">
+        <span class="eyebrow">{page.casuel.montants_titre}</span>
+        <table class="amounts">
+          <tbody>
+            {
+              page.casuel.montants.map((m: any) => (
+                <tr>
+                  <th scope="row">{m.libelle}</th>
+                  <td>{m.montant}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .sacs {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  }
+
+  .sac {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sac .actions {
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  .sac h2 {
+    font-size: 1.9rem;
+  }
+
+  .ico {
+    display: inline-grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--paper-2);
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+
+  .texte :global(ol) {
+    padding-left: 1.3em;
+  }
+
+  .texte :global(li) {
+    margin-bottom: 4px;
+  }
+
+  .other {
+    margin-top: 32px;
+  }
+
+  .casuel {
+    align-items: center;
+  }
+
+  .amounts {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  .amounts th {
+    text-align: left;
+    font-weight: 500;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .amounts td {
+    text-align: right;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--blue-dark);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .amounts tr:last-child th,
+  .amounts tr:last-child td {
+    border-bottom: 0;
+  }
+</style>

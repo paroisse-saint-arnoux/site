@@ -1,0 +1,178 @@
+---
+import Icon from './Icon.astro';
+import Logo from '../assets/logo/Logo carre Saint Arnoux.svg';
+import { nav, site } from '../data/site';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(href);
+---
+
+<header class="header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label={`${site.name} – accueil`}>
+      <Logo class="brand-mark" viewBox="26 60 204 134" aria-hidden="true" />
+      <span>
+        <strong>Paroisse Saint Arnoux</strong>
+        <small>{site.tagline}</small>
+      </span>
+    </a>
+    <button class="toggle" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="visually-hidden">Menu</span>
+      <span class="open"><Icon name="Menu" size={26} /></span>
+      <span class="close"><Icon name="X" size={26} /></span>
+    </button>
+    <nav id="menu" class="nav" aria-label="Navigation principale">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.header .toggle');
+  const header = document.querySelector('.header');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    header?.classList.toggle('is-open', open);
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(250 246 239 / 94%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 68px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--blue-dark);
+  }
+
+  .brand-mark {
+    width: auto;
+    height: 52px;
+    flex: none;
+  }
+
+  .brand strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    line-height: 1.1;
+  }
+
+  .brand small {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 999px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.98rem;
+  }
+
+  .nav a:hover {
+    background: var(--paper-2);
+    color: var(--blue-dark);
+  }
+
+  .nav a[aria-current='page'] {
+    background: var(--blue);
+    color: #fff;
+  }
+
+  .toggle {
+    display: none;
+    background: none;
+    border: 0;
+    padding: 8px;
+    color: var(--blue-dark);
+    cursor: pointer;
+  }
+
+  .toggle .close {
+    display: none;
+  }
+
+  @media (max-width: 1020px) {
+    .toggle {
+      display: inline-flex;
+    }
+
+    .bar {
+      flex-wrap: wrap;
+    }
+
+    .nav {
+      display: none;
+      width: 100%;
+      padding-bottom: 12px;
+    }
+
+    .nav ul {
+      flex-direction: column;
+    }
+
+    .nav a {
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .is-open .nav {
+      display: block;
+    }
+
+    .is-open .toggle .open {
+      display: none;
+    }
+
+    .is-open .toggle .close {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .brand small {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getOrdered, getPage } from '../../lib/content';
+
+const { data: page } = await getPage('histoire');
+const articles = await getOrdered('histoire');
+---
+
+<Base title={page.titre} description={page.description}>
+  <PageHeader eyebrow={page.surtitre} title={page.titre} lead={page.intro} />
+  <section class="section">
+    <div class="wrap grid grid--3">
+      {
+        articles.map((a) => (
+          <a class="card article" href={`/histoire/${a.id}/`}>
+            <img src={a.data.image} alt="" loading="lazy" />
+            <h2>{a.data.titre}</h2>
+            <p>{a.data.resume}</p>
+            <span class="more">{page.lire_la_suite}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .article {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--ink);
+    overflow: hidden;
+  }
+
+  .article:hover {
+    color: var(--ink);
+    border-color: var(--blue);
+  }
+
+  .article img {
+    margin: calc(-1 * clamp(18px, 3vw, 28px)) calc(-1 * clamp(18px, 3vw, 28px)) 18px;
+    max-width: none;
+    width: calc(100% + 2 * clamp(18px, 3vw, 28px));
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .article h2 {
+    font-size: 1.6rem;
+  }
+
+  .article p {
+    color: var(--ink-soft);
+    flex: 1;
+  }
+
+  .more {
+    font-weight: 600;
+    color: var(--blue);
+  }
+</style>

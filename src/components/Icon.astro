@@ -1,0 +1,28 @@
+---
+import * as lucide from 'lucide-static';
+import { siFacebook, siWhatsapp, siMailchimp } from 'simple-icons';
+
+const brands = { facebook: siFacebook, whatsapp: siWhatsapp, mailchimp: siMailchimp };
+
+interface Props {
+  name: string;
+  size?: number;
+}
+
+const { name, size = 20 } = Astro.props;
+
+let svg: string;
+if (name in brands) {
+  const icon = brands[name as keyof typeof brands];
+  svg = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="currentColor" aria-hidden="true"><path d="${icon.path}"/></svg>`;
+} else {
+  const source = (lucide as Record<string, string>)[name];
+  if (!source) throw new Error(`Icône inconnue : ${name}`);
+  svg = source
+    .replace(/class="[^"]*"/, 'aria-hidden="true"')
+    .replace(/width="24"/, `width="${size}"`)
+    .replace(/height="24"/, `height="${size}"`);
+}
+---
+
+<Fragment set:html={svg} />

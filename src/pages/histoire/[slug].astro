@@ -1,0 +1,97 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getOrdered, render } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const articles = await getOrdered('histoire');
+  return articles.map((article) => ({ params: { slug: article.id }, props: { article, articles } }));
+}
+
+const { article, articles } = Astro.props;
+const { Content } = await render(article);
+const others = articles.filter((a) => a.id !== article.id);
+const description = article.data.resume.slice(0, 160).replace(/\s+\S*$/, '…');
+---
+
+<Base title={article.data.titre} description={description}>
+  <PageHeader eyebrow="Histoire" title={article.data.titre} />
+  <section class="section">
+    <div class="wrap">
+      <article class="prose histoire">
+        <Content />
+      </article>
+      <hr />
+      <nav aria-label="Autres pages d'histoire">
+        <h2>À lire aussi</h2>
+        <ul class="others">
+          {others.map((a) => <li><a href={`/histoire/${a.id}/`}>{a.data.titre}</a></li>)}
+          <li><a href="/histoire/">Toute l'histoire de la paroisse</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .histoire::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .histoire :global(figure) {
+    margin: 0.5rem 0 1.25rem;
+  }
+
+  .histoire :global(figure[data-align='left']),
+  .histoire :global(figure[data-align='right']) {
+    max-width: min(45%, 230px);
+  }
+
+  .histoire :global(figure[data-align='left']) {
+    float: left;
+    margin-right: 1.5rem;
+  }
+
+  .histoire :global(figure[data-align='right']) {
+    float: right;
+    margin-left: 1.5rem;
+  }
+
+  .histoire :global(figure[data-align='center']) {
+    clear: both;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .histoire :global(img) {
+    max-width: 100%;
+    height: auto !important;
+  }
+
+  .histoire :global(h2) {
+    clear: both;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 560px) {
+    .histoire :global(figure[data-align='left']),
+    .histoire :global(figure[data-align='right']) {
+      float: none;
+      margin-inline: 0;
+    }
+  }
+
+  hr {
+    clear: both;
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 48px 0 32px;
+  }
+
+  .others {
+    padding-left: 1.2em;
+  }
+</style>

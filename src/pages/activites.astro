@@ -1,0 +1,195 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import AgendaList from '../components/AgendaList.astro';
+import Icon from '../components/Icon.astro';
+import { sectionById } from '../data/agenda';
+import { getOrdered, getPage, render } from '../lib/content';
+import hero from '../assets/photos/aumonerie.jpg';
+import kt from '../assets/photos/kt.jpg';
+import aumonerie from '../assets/photos/aumonerie-2.jpg';
+
+const { data: page, Content } = await getPage('activites');
+const blocks = await Promise.all(
+  (await getOrdered('activites')).map(async (entry) => ({
+    ...entry.data,
+    section: sectionById(entry.data.rubrique),
+    Content: (await render(entry)).Content,
+  })),
+);
+const familles = sectionById('messes-des-familles');
+---
+
+<Base title={page.titre} description={page.description}>
+  <PageHeader
+    eyebrow={page.surtitre}
+    title={page.titre}
+    lead={page.intro}
+    image={hero}
+    imageAlt={page.photo}
+    position="center 40%"
+  />
+
+  <section class="section">
+    <div class="wrap grid grid--2 intro">
+      <div class="texte">
+        <Content />
+      </div>
+      <ul class="forms">
+        {
+          page.formulaires.map((f: any) => (
+            <li>
+              <a class="card form-link" href={f.lien} target="_blank" rel="noopener">
+                <span>
+                  <strong>{f.titre}</strong>
+                  <span class="muted">{f.lieu}</span>
+                </span>
+                <Icon name="ArrowRight" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="wrap">
+      <span class="eyebrow">{page.activites.surtitre}</span>
+      <h2>{page.activites.titre}</h2>
+      <div class="photos">
+        <Image src={kt} alt="Enfants du catéchisme présentant leurs dessins de la Création" width={800} widths={[480, 800]} sizes="(max-width: 700px) 100vw, 50vw" />
+        <Image src={aumonerie} alt="Deux jeunes de l'aumônerie avec des lunettes en carton en forme de cœur" width={800} widths={[480, 800]} sizes="(max-width: 700px) 100vw, 50vw" />
+      </div>
+      <div class="blocks">
+        {
+          blocks.map((b) => (
+            <details class="card block" id={b.section.id}>
+              <summary>
+                <span>
+                  <span class="age">{b.public}</span>
+                  <h3>{b.titre}</h3>
+                </span>
+                <span class="chev" aria-hidden="true">
+                  <Icon name="ArrowRight" />
+                </span>
+              </summary>
+              <b.Content />
+              {b.section.intro && <p class="muted small">{b.section.intro}</p>}
+              <AgendaList items={b.section.items} withYear />
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>{page.familles.titre}</h2>
+      <p class="muted">{page.familles.intro}</p>
+      <AgendaList items={familles.items} withYear />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    align-items: start;
+  }
+
+  .texte :global(blockquote) {
+    margin: 0;
+    border-left: 4px solid var(--ochre);
+    background: #fff8ea;
+    padding: 14px 18px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  .texte :global(blockquote p) {
+    margin: 0;
+  }
+
+  .forms {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .form-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .form-link > span {
+    display: grid;
+  }
+
+  .form-link:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .photos img {
+    border-radius: var(--radius);
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .blocks {
+    display: grid;
+    gap: 12px;
+  }
+
+  .block summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .block summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .block h3 {
+    margin: 0;
+  }
+
+  .block[open] summary {
+    margin-bottom: 12px;
+  }
+
+  .age {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--terracotta);
+  }
+
+  .chev {
+    color: var(--blue);
+    transition: transform 0.2s;
+  }
+
+  .block[open] .chev {
+    transform: rotate(90deg);
+  }
+</style>

@@ -1,0 +1,186 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Icon from '../../components/Icon.astro';
+import Markdown from '../../components/Markdown.astro';
+import { channels, contact, permanences } from '../../data/site';
+import { getPage } from '../../lib/content';
+
+const { data: page } = await getPage('contact');
+
+const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
+const slotsFor = (day: string) => permanences.find((p) => p.day === day)?.slots ?? [];
+
+// Les valeurs doivent correspondre à la liste $subjects de public/contact.php
+const subjects = [
+  { value: 'renseignement', label: 'Demande de renseignement' },
+  { value: 'bapteme', label: 'Baptême' },
+  { value: 'mariage', label: 'Mariage' },
+  { value: 'confirmation', label: 'Confirmation' },
+  { value: 'obseques', label: 'Obsèques' },
+  { value: 'intention', label: 'Intention de messe' },
+  { value: 'activites', label: 'Catéchisme, aumônerie, activités' },
+  { value: 'autre', label: 'Autre' },
+];
+---
+
+<Base title={page.titre} description={page.description}>
+  <PageHeader eyebrow={page.surtitre} title={page.titre} lead={page.intro} />
+
+  <section class="section">
+    <div class="wrap grid grid--2 layout">
+      <div class="infos">
+        <div class="card">
+          <h2>{page.accueil}</h2>
+          <ul class="lines">
+            <li>
+              <Icon name="MapPin" />
+              <span>
+                <strong>{contact.place}</strong><br />
+                {contact.street}, {contact.city}<br />
+                <a href={contact.mapUrl} target="_blank" rel="noopener">Voir sur la carte</a>
+              </span>
+            </li>
+            <li>
+              <Icon name="Phone" />
+              <span>
+                <a href={contact.phoneHref}>{contact.phone}</a><br />
+                <span class="muted small">{page.repondeur}</span>
+              </span>
+            </li>
+            <li>
+              <Icon name="Mail" />
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </li>
+            <li>
+              <Icon name="facebook" />
+              <a href={channels.facebook} target="_blank" rel="noopener">facebook.com/saint.arnoux</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>{page.permanences}</h2>
+          <table class="perm">
+            <tbody>
+              {
+                days.map((day) => (
+                  <tr>
+                    <th scope="row">{day}</th>
+                    <td>{slotsFor(day).length ? slotsFor(day).join(' et ') : <span class="muted">–</span>}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+          <p class="small muted">{page.permanences_note}</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>{page.formulaire}</h2>
+        <p class="note error" id="form-error" hidden>
+          <Markdown text={page.erreur} inline />
+        </p>
+        <form class="form" action="/contact.php" method="post">
+          <div class="row">
+            <label>Nom et prénom<input type="text" name="name" autocomplete="name" required maxlength="120" /></label>
+            <label>Téléphone<input type="tel" name="phone" autocomplete="tel" maxlength="30" /></label>
+          </div>
+          <label>Adresse e-mail<input type="email" name="email" autocomplete="email" required maxlength="160" /></label>
+          <label>
+            Objet
+            <select name="subject" required>
+              {subjects.map((s) => <option value={s.value}>{s.label}</option>)}
+            </select>
+          </label>
+          <label>Message<textarea name="message" rows="7" required maxlength="5000"></textarea></label>
+          <div class="hp" aria-hidden="true">
+            <label>Ne pas remplir<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+          <input type="hidden" name="elapsed" value="" />
+          <label class="check">
+            <input type="checkbox" name="consent" value="1" required />
+            <span class="small">{page.consentement}</span>
+          </label>
+          <div>
+            <button class="btn" type="submit"><Icon name="Send" /> Envoyer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const form = document.querySelector<HTMLFormElement>('form[action="/contact.php"]');
+  if (form) {
+    // Durée de remplissage, utilisée par contact.php pour écarter les envois trop rapides (robots)
+    const start = Date.now();
+    form.addEventListener('submit', () => {
+      const elapsed = form.elements.namedItem('elapsed') as HTMLInputElement | null;
+      if (elapsed) elapsed.value = String(Date.now() - start);
+    });
+    const subject = form.elements.namedItem('subject') as HTMLSelectElement | null;
+    const wanted = params.get('objet');
+    if (subject && wanted && [...subject.options].some((o) => o.value === wanted)) subject.value = wanted;
+  }
+  if (params.has('erreur')) document.getElementById('form-error')?.removeAttribute('hidden');
+</script>
+
+<style>
+  .layout {
+    align-items: start;
+  }
+
+  .infos {
+    display: grid;
+    gap: 24px;
+  }
+
+  .lines {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  .lines li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .lines :global(svg) {
+    flex: none;
+    color: var(--terracotta);
+    margin-top: 3px;
+  }
+
+  .lines a {
+    overflow-wrap: anywhere;
+  }
+
+  .perm {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .perm th,
+  .perm td {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+
+  .perm th {
+    width: 40%;
+  }
+
+  .error {
+    border-left-color: var(--terracotta);
+    background: #fdeee9;
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import { channels, contact } from '../data/site';
+import { getPage } from '../lib/content';
+
+const { data: page } = await getPage('restez-informes');
+
+// Le champ « pot de miel » de Mailchimp s'appelle b_<u>_<id>
+const action = channels.mailchimpAction;
+const params = action ? new URL(action).searchParams : null;
+const honeypot = params ? `b_${params.get('u')}_${params.get('id')}` : '';
+---
+
+{
+  action ? (
+    <form class="form newsletter" action={action} method="post" target="_blank">
+      <div class="row">
+        <label>
+          Prénom
+          <input type="text" name="FNAME" autocomplete="given-name" />
+        </label>
+        <label>
+          Nom
+          <input type="text" name="LNAME" autocomplete="family-name" />
+        </label>
+      </div>
+      <label>
+        Adresse e-mail
+        <input type="email" name="EMAIL" autocomplete="email" required />
+      </label>
+      <div class="hp" aria-hidden="true">
+        <input type="text" name={honeypot} tabindex="-1" value="" />
+      </div>
+      <div>
+        <button class="btn" type="submit">S'inscrire à la newsletter</button>
+      </div>
+      <p class="small muted">{page.newsletter.desinscription}</p>
+    </form>
+  ) : (
+    <p>
+      Pour recevoir la newsletter, écrivez-nous à <a href={`mailto:${contact.email}?subject=Inscription%20à%20la%20newsletter`}>{contact.email}</a>.
+    </p>
+  )
+}
