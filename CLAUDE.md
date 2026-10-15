@@ -1,0 +1,45 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project
+
+Static brochure site for the Catholic parish Saint Arnoux (saint-arnoux.fr), built with **Astro 7**, hosted on O2switch (Apache/PHP shared hosting). All user-facing text, comments and docs are in **French**; keep it that way. `README.md` covers day-to-day content editing, `INSTALL.md` covers hosting, Mailchimp, the contact form and the deploy pipeline.
+
+## Commands
+
+```sh
+npm run dev       # dev server (Astro 7 runs it as a background daemon; `npx astro dev stop` to stop)
+npm run build     # static output in dist/ — this is the only check (no tests, no linter)
+npm run preview   # serve dist/ (also a daemon; `npx astro preview stop`)
+```
+
+- Restart `astro dev` after changing `src/content.config.ts` or `astro.config.mjs`; otherwise collections are missing ("Texte introuvable : src/content/pages/…").
+- `public/contact.php` can't run under `astro dev`. Test it with `php -l` and `php -S 127.0.0.1:8765 -t dist` with a fake `sendmail_path`. The PHP built-in server is single-threaded, so use `astro preview` for screenshots.
+- Deploy: every push to `main` triggers `.github/workflows/deploy.yml` (build + FTPS upload of `dist/` via SamKirkland/FTP-Deploy-Action; secrets `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`, optional var `FTP_SERVER_DIR`). Pushing to `main` therefore publishes the live site.
+
+## Architecture
+
+**Content is separated from templates; editors only touch Markdown/YAML.** Pages in `src/pages/*.astro` contain layout and markup only; their text comes from:
+
+- `src/content/` – Astro content collections defined in `src/content.config.ts` (glob loader, `astro/zod` schemas):
+  - `pages/<id>.md`: one file per page. The front matter holds titles and short strings, including page-specific nested fields (the schema is `.loose()`). The body is the page's main prose, rendered with `<Content />`. Load a page with `getPage(id)` from `src/lib/content.ts`, which returns `{ data, Content }`. The mass schedule (summer/winter `saisons`, `devotions`) lives in the front matter of `pages/horaires.md`, the Enoria sign-up links in `pages/activites.md`, and the channel card texts (used by `Channels.astro` and `NewsletterForm.astro`) in `pages/restez-informes.md`.
+  - `sacrements/`, `activites/`, `histoire/`: one card or article per file, sorted by an `ordre` field (`getOrdered()`). Each `activites/*.md` names an agenda `rubrique` whose dates are shown with it. History slugs come from the file names (`src/pages/histoire/[slug].astro`).
+  - Front matter strings that need inline Markdown (links, bold) are rendered with `components/Markdown.astro` (uses `marked`).
+- `src/data/agenda.yml` – the pastoral calendar (sections → dated items, French keys `date`/`fin`/`titre`/`heure`/`lieu`/`messe`/`accueil`). `src/data/agenda.ts` imports it with `?raw`, parses it with `yaml`, validates it by hand (it throws with a pointer to the faulty section and entry, which fails the build), and exposes English-keyed `AgendaItem`/`AgendaSection`. `messe: true` items feed "Messes et célébrations particulières" on `/horaires/`; `accueil: true` sections feed "Prochains rendez-vous" on the home page.
+- `src/data/site.ts` – contact details, office hours, nav, social/Mailchimp links (`channels.mailchimpAction`, empty until configured), booklet PDF path.
+
+**Markdown pipeline**: Astro 7 defaults to the Sätteri processor. This project sets `markdown.processor: unified({ rehypePlugins: [rehypeFigures] })` from `@astrojs/markdown-remark` in `astro.config.mjs`. `src/lib/rehype-figures.mjs` turns a paragraph containing only images into `<figure data-align>` blocks: the `#gauche`/`#droite` URL hash sets the alignment and the image title becomes the `<figcaption>`. It also adds `target="_blank"` to external links. History images are plain files in `public/histoire/` (not optimized); other photos are in `src/assets/photos/` and go through `astro:assets` `<Image>`.
+
+**Dates without rebuilds**: `components/AgendaList.astro` renders `data-date` on each item; an inline script greys out or hides past items and applies a `limit` client-side, using today's date in Europe/Paris. Pages also filter past items at build time. `/horaires/` highlights the current season by checking whether Paris is on UTC+2 (summer time), both at build time and in the browser.
+
+**messes.info widget** on `/horaires/` is injected into the DOM (GWT script, not an iframe). Its markup is restyled and partly hidden via `:global(...)` selectors in `src/pages/horaires.astro`.
+
+**Server side** is only `public/contact.php`: it validates the POST, applies a honeypot (`website`) and a minimum fill time (`elapsed` ms, sent by the page's JS, client-measured to avoid clock skew), sends with `mail()` (From = domain address, Reply-To = sender), and redirects with 303 to `/contact/merci/` or `/contact/?erreur=1`. The subject list must stay identical in `$subjects` (PHP) and `subjects` in `src/pages/contact/index.astro`. `public/.htaccess` forces HTTPS on the bare domain, sets the 404 page and redirects old WordPress URLs.
+
+## Conventions and gotchas
+
+- Astro collapses whitespace between a text line and a following inline tag on the next line; write `{' '}` before a link that starts a new line.
+- Icons: `components/Icon.astro` takes a lucide-static export name (`Clock`, `MapPin`…) or `facebook`/`whatsapp`/`mailchimp` (simple-icons), resolved at build time.
+- The header logo is the SVG from `src/assets/logo/`, imported as a component with a cropped `viewBox`; `public/favicon.svg` is a copy cropped to a square, so update it by hand if the logo changes.
+- The `*:Zone.Identifier` files that WSL creates are gitignored and excluded from the FTP deploy.

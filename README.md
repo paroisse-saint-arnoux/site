@@ -10,6 +10,8 @@ npm run dev      # http://localhost:4321
 npm run build    # génère le site dans dist/
 ```
 
+Première installation : voir [INSTALL.md](INSTALL.md).
+
 ## Mettre à jour le contenu
 
 ### Les textes : `src/content/` (Markdown)
@@ -41,22 +43,8 @@ Dans l'en-tête, mettre une phrase entre guillemets si elle contient « : ». Po
 - Livret de l'année : remplacer `public/livret-paroissial-2026-2027.pdf` (et `livret` dans `site.ts`).
 - Photos : `src/assets/photos/` ; elles sont redimensionnées et converties en WebP au build.
 
-## Newsletter (Mailchimp)
+## Installation, configuration et publication
 
-Renseigner `channels.mailchimpAction` dans `src/data/site.ts` avec l'URL du formulaire intégré Mailchimp (Audience › Signup forms › Embedded forms, attribut `action` du `<form>`). Tant qu'elle est vide, la page « Restez informés » propose d'écrire à la paroisse.
+Voir [INSTALL.md](INSTALL.md) : hébergement O2switch, formulaire de contact, newsletter Mailchimp, publication automatique par GitHub Actions et vérifications après la mise en ligne.
 
-## Formulaire de contact
-
-`public/contact.php` reçoit le formulaire de `/contact/` et l'envoie par e-mail avec `mail()`. Configuration en tête du fichier :
-
-- `MAIL_TO` : destinataire (adresse de la paroisse) ;
-- `MAIL_FROM` : expéditeur, **une adresse du domaine saint-arnoux.fr** (valide pour SPF/DKIM), sinon les messages risquent de finir en spam. La réponse se fait directement à la personne grâce au `Reply-To`.
-
-Protection anti-spam : champ caché (« pot de miel ») et rejet des envois remplis en moins de 3 secondes.
-
-## Déploiement sur O2switch
-
-1. `npm run build`
-2. Copier **le contenu** de `dist/` dans `public_html/` (FTP, ou `rsync -av --delete dist/ user@serveur:~/public_html/` en SSH).
-
-Le fichier `.htaccess` (copié depuis `public/`) force HTTPS, retire le `www`, renvoie la page 404 et redirige les anciennes adresses du site WordPress.
+En résumé, chaque push sur `main` publie automatiquement le site sur O2switch.
