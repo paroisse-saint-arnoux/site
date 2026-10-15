@@ -37,6 +37,27 @@ permanences:
   texte: Une équipe de bénévoles vous accueille au **Centre Saint Joseph**, 1104 route de Nice, 06650 Le Rouret.
   note: Hors jours fériés et vacances scolaires.
 
+# Bloc « Saint Joseph 2 », le projet de nouvelle église au Rouret
+saint_joseph:
+  surtitre: Projet Saint Joseph 2
+  titre: Bâtir un lieu de Foi, de Vie et d'Espérance
+  texte: |
+    Pour accueillir une communauté qui grandit, la paroisse construit au Rouret un nouvel ensemble paroissial : une **église**, un **centre paroissial** et un **presbytère**, sur un terrain d'un hectare déjà acquis.
+
+    Chaque pierre compte. La vôtre aussi…
+  chiffres:
+    - valeur: "400"
+      libelle: personnes accueillies
+    - valeur: 22 m
+      libelle: de clocher
+    - valeur: "2030"
+      libelle: livraison prévue
+  lien: https://saint-joseph.saint-arnoux.fr/
+  bouton_projet: Découvrir le projet
+  lien_don: https://don-nice.catholique.fr/centre-paroissial-st-arnoux-rouret/
+  bouton_don: Faire un don
+  photo: Esquisse du futur ensemble paroissial Saint-Joseph, avec l'église, son clocher et le centre paroissial autour du parvis
+
 canaux:
   surtitre: Restez informés
   titre: Ne manquez aucune nouvelle de la paroisse

@@ -11,6 +11,7 @@ import { todayIso } from '../lib/dates';
 import { getPage } from '../lib/content';
 import hero from '../assets/photos/pretres-enfants-de-choeur.jpg';
 import kt from '../assets/photos/kt.jpg';
+import saintJoseph from '../assets/saint-joseph/l-ensemble-paroissial-dans-son-site.jpeg';
 
 const today = todayIso();
 // Les dates passées au moment du build sont écartées ; le navigateur
@@ -96,6 +97,37 @@ const { data: page, Content } = await getPage('accueil');
           <a href={contact.phoneHref}><Icon name="Phone" size={16} /> {contact.phone}</a><br />
           <a href={`mailto:${contact.email}`}><Icon name="Mail" size={16} /> {contact.email}</a>
         </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sj2">
+    <div class="wrap grid grid--2 split">
+      <a class="sj2-image" href={page.saint_joseph.lien} target="_blank" rel="noopener">
+        <Image src={saintJoseph} alt={page.saint_joseph.photo} width={1200} widths={[480, 800, 1200]} sizes="(max-width: 700px) 100vw, 50vw" />
+      </a>
+      <div>
+        <span class="eyebrow">{page.saint_joseph.surtitre}</span>
+        <h2>{page.saint_joseph.titre}</h2>
+        <Markdown text={page.saint_joseph.texte} />
+        <dl class="sj2-chiffres">
+          {
+            page.saint_joseph.chiffres.map((c: any) => (
+              <div>
+                <dt>{c.valeur}</dt>
+                <dd>{c.libelle}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="actions">
+          <a class="btn btn--light" href={page.saint_joseph.lien} target="_blank" rel="noopener">
+            {page.saint_joseph.bouton_projet} <Icon name="ExternalLink" />
+          </a>
+          <a class="btn btn--ghost on-dark" href={page.saint_joseph.lien_don} target="_blank" rel="noopener">
+            <Icon name="Heart" /> {page.saint_joseph.bouton_don}
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -250,6 +282,53 @@ const { data: page, Content } = await getPage('accueil');
   .rounded {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+  }
+
+  .sj2 {
+    background: var(--blue-dark);
+    color: #dfe6ee;
+  }
+
+  .sj2 h2 {
+    color: #fff;
+  }
+
+  .sj2 .eyebrow {
+    color: #f3d79b;
+  }
+
+  .sj2 :global(strong) {
+    color: #fff;
+  }
+
+  .sj2-image img {
+    border-radius: var(--radius);
+    box-shadow: 0 12px 40px rgb(0 0 0 / 35%);
+    transition: transform 0.2s;
+  }
+
+  .sj2-image:hover img {
+    transform: scale(1.01);
+  }
+
+  .sj2-chiffres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    margin: 1.5rem 0 0;
+  }
+
+  .sj2-chiffres dt {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #f3d79b;
+  }
+
+  .sj2-chiffres dd {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 700px) {
