@@ -55,22 +55,22 @@ const current = isSummer(new Date()) ? 'ete' : 'hiver';
                 {season.jours.map((d: any) => (
                   <div class="day">
                     <dt>{d.jour}</dt>
-                    <dd>
-                      <ul>
-                        {d.messes.map((s: any) => (
-                          <li>
-                            <strong>{s.heure}</strong> {s.lieu}
-                            {s.precision && <span class="muted"> – {s.precision}</span>}
-                          </li>
-                        ))}
-                      </ul>
-                    </dd>
+                    {d.messes?.length ? (
+                      <dd>
+                        <ul>
+                          {d.messes.map((s: any) => (
+                            <li>
+                              <strong>{s.heure}</strong> {s.lieu}
+                              {s.precision && <span class="muted"> – {s.precision}</span>}
+                            </li>
+                          ))}
+                        </ul>
+                      </dd>
+                    ) : (
+                      <dd class="muted">{page.aucune_messe}</dd>
+                    )}
                   </div>
                 ))}
-                <div class="day">
-                  <dt>Lundi</dt>
-                  <dd class="muted">{page.lundi}</dd>
-                </div>
               </dl>
             </article>
           ))

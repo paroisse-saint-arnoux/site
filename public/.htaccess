@@ -1,4 +1,9 @@
 Options -Indexes
+
+# Clé d'API Mailchimp : jamais accessible depuis le web
+<Files "newsletter.config.php">
+  Require all denied
+</Files>
 ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>

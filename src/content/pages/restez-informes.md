@@ -22,7 +22,12 @@ canaux:
 newsletter:
   titre: S'inscrire à la newsletter
   texte: Les informations de la paroisse et la feuille paroissiale, par e-mail.
+  prenom: Prénom
+  nom: Nom
+  email: Adresse e-mail
+  bouton: S'inscrire à la newsletter
   desinscription: Vous pourrez vous désinscrire à tout moment grâce au lien présent en bas de chaque e-mail.
+  erreur: "L'inscription n'a pas pu être enregistrée. Vérifiez votre adresse e-mail et réessayez, ou écrivez-nous à [paroisse.starnoux@nice.catholique.fr](mailto:paroisse.starnoux@nice.catholique.fr)."
 
 whatsapp:
   titre: Rejoindre la communauté WhatsApp

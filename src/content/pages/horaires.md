@@ -6,7 +6,8 @@ description: Horaires des messes du week-end et de semaine dans les églises de 
 photo: L'autel illuminé de bougies lors de la messe du 8 décembre
 
 en_ce_moment: En ce moment
-lundi: Pas de messe
+# Texte affiché pour un jour sans messe (jour sans liste « messes »)
+aucune_messe: Pas de messe
 
 # Horaires habituels. La saison en cours est mise en avant automatiquement
 # (été pendant l'heure d'été, hiver le reste de l'année).
@@ -34,6 +35,7 @@ saisons:
           - heure: 16h
             lieu: Courmes
             precision: 3e dimanche du mois
+      - jour: Lundi
       - jour: Mardi
         messes:
           - heure: 18h
@@ -79,6 +81,7 @@ saisons:
           - heure: 17h
             lieu: Courmes
             precision: 3e dimanche du mois
+      - jour: Lundi
       - jour: Mardi
         messes:
           - heure: 18h

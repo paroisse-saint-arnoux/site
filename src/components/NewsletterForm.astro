@@ -1,43 +1,59 @@
 ---
-import { channels, contact } from '../data/site';
+// Formulaire d'inscription à la newsletter, traité par public/newsletter.php
+// (API Mailchimp). Textes : src/content/pages/restez-informes.md
+import Icon from './Icon.astro';
+import Markdown from './Markdown.astro';
 import { getPage } from '../lib/content';
 
-const { data: page } = await getPage('restez-informes');
-
-// Le champ « pot de miel » de Mailchimp s'appelle b_<u>_<id>
-const action = channels.mailchimpAction;
-const params = action ? new URL(action).searchParams : null;
-const honeypot = params ? `b_${params.get('u')}_${params.get('id')}` : '';
+const { newsletter } = (await getPage('restez-informes')).data;
 ---
 
-{
-  action ? (
-    <form class="form newsletter" action={action} method="post" target="_blank">
-      <div class="row">
-        <label>
-          Prénom
-          <input type="text" name="FNAME" autocomplete="given-name" />
-        </label>
-        <label>
-          Nom
-          <input type="text" name="LNAME" autocomplete="family-name" />
-        </label>
-      </div>
-      <label>
-        Adresse e-mail
-        <input type="email" name="EMAIL" autocomplete="email" required />
-      </label>
-      <div class="hp" aria-hidden="true">
-        <input type="text" name={honeypot} tabindex="-1" value="" />
-      </div>
-      <div>
-        <button class="btn" type="submit">S'inscrire à la newsletter</button>
-      </div>
-      <p class="small muted">{page.newsletter.desinscription}</p>
-    </form>
-  ) : (
-    <p>
-      Pour recevoir la newsletter, écrivez-nous à <a href={`mailto:${contact.email}?subject=Inscription%20à%20la%20newsletter`}>{contact.email}</a>.
-    </p>
-  )
-}
+<p class="note error" id="newsletter-error" hidden>
+  <Markdown text={newsletter.erreur} inline />
+</p>
+<form class="form newsletter" action="/newsletter.php" method="post">
+  <div class="row">
+    <label>
+      {newsletter.prenom}
+      <input type="text" name="prenom" autocomplete="given-name" maxlength="80" />
+    </label>
+    <label>
+      {newsletter.nom}
+      <input type="text" name="nom" autocomplete="family-name" maxlength="80" />
+    </label>
+  </div>
+  <label>
+    {newsletter.email}
+    <input type="email" name="email" autocomplete="email" required maxlength="160" />
+  </label>
+  <div class="hp" aria-hidden="true">
+    <label>Ne pas remplir<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+  </div>
+  <input type="hidden" name="elapsed" value="" />
+  <div>
+    <button class="btn" type="submit"><Icon name="Mail" /> {newsletter.bouton}</button>
+  </div>
+  <p class="small muted">{newsletter.desinscription}</p>
+</form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('form.newsletter');
+  if (form) {
+    // Durée de remplissage, utilisée par newsletter.php pour écarter les robots
+    const start = Date.now();
+    form.addEventListener('submit', () => {
+      const elapsed = form.elements.namedItem('elapsed') as HTMLInputElement | null;
+      if (elapsed) elapsed.value = String(Date.now() - start);
+    });
+  }
+  if (new URLSearchParams(location.search).get('erreur') === 'newsletter') {
+    document.getElementById('newsletter-error')?.removeAttribute('hidden');
+  }
+</script>
+
+<style>
+  .error {
+    border-left-color: var(--terracotta);
+    background: #fdeee9;
+  }
+</style>

@@ -41,10 +41,6 @@ export const permanences = [
 export const channels = {
   facebook: 'https://www.facebook.com/saint.arnoux',
   whatsapp: 'https://chat.whatsapp.com/DCCE5OTwmPI0iyaTn9hJhs',
-  // URL « action » du formulaire intégré Mailchimp
-  // (Audience › Signup forms › Embedded forms), de la forme :
-  // https://xxxx.us21.list-manage.com/subscribe/post?u=XXXXXXXX&id=YYYYYYYY
-  mailchimpAction: '',
 };
 
 export const livret = {

@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Channels from '../../components/Channels.astro';
+import { getPage } from '../../lib/content';
+
+const { data: page } = await getPage('newsletter-merci');
+---
+
+<Base title={page.titre}>
+  <PageHeader eyebrow={page.surtitre} title={page.titre} lead={page.intro}>
+    <div class="actions">
+      <a class="btn" href="/">Retour à l'accueil</a>
+    </div>
+  </PageHeader>
+  <section class="section">
+    <div class="wrap">
+      <h2>{page.suite}</h2>
+      <Channels />
+    </div>
+  </section>
+</Base>

@@ -36,7 +36,7 @@ Dans l'en-tête, mettre une phrase entre guillemets si elle contient « : ». Po
 | Fichier | Contenu |
 | --- | --- |
 | `agenda.yml` | Calendrier pastoral de l'année (repris du livret paroissial) – mode d'emploi en tête du fichier |
-| `site.ts` | Coordonnées, permanences, liens Facebook / WhatsApp / Mailchimp, menu |
+| `site.ts` | Coordonnées, permanences, liens Facebook / WhatsApp, menu |
 
 - **Horaires des messes** : les horaires habituels sont dans `src/content/pages/horaires.md` (la saison en cours est mise en avant automatiquement au changement d'heure). En dessous, le widget de [messes.info](https://messes.info/communaute/nc/06/saint-pierre-du-brusc) affiche le détail des prochaines célébrations, à tenir à jour sur messes.info.
 - Dans `agenda.yml`, `messe: true` fait apparaître un événement dans « Messes et célébrations particulières » (page Horaires), et les rubriques `accueil: true` alimentent « Prochains rendez-vous » sur l'accueil. Les dates passées sont grisées ou masquées automatiquement dans le navigateur, sans avoir à reconstruire le site. Une erreur de saisie (date mal écrite, champ manquant) fait échouer `npm run build` avec un message indiquant la ligne en cause.

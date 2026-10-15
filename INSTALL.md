@@ -85,22 +85,43 @@ La liste « Objet » du formulaire est définie à deux endroits qui doivent res
 
 ## 4. Newsletter Mailchimp
 
-Le formulaire d'inscription (page `/restez-informes/`) envoie directement les inscriptions à Mailchimp ; aucune clé secrète n'est nécessaire.
+Le formulaire de la page `/restez-informes/` est traité par le script `public/newsletter.php`, qui inscrit la personne dans l'audience Mailchimp via l'**API Mailchimp**. L'inscription est **immédiate** (simple opt-in, sans e-mail de confirmation à cliquer) et le visiteur reste sur le site (page `/newsletter/merci/`).
 
-1. Dans Mailchimp : *Audience › Signup forms › Embedded forms*.
-2. Dans le code proposé, repérer la balise `<form action="…">` et copier l'adresse de `action`. Elle ressemble à :
-   `https://xxxx.us21.list-manage.com/subscribe/post?u=XXXXXXXXXXXX&id=YYYYYYYYYY`
-3. La coller dans `src/data/site.ts` :
+Conseil : activer dans Mailchimp l'**e-mail de bienvenue** automatique de l'audience (selon l'interface : *Audience › Signup forms › Form builder › Final welcome email*, ou un parcours automatisé « Welcome new subscribers »). Les inscrits reçoivent ainsi un message de bienvenue sans avoir rien à faire, et une adresse mal saisie se repère par l'échec de l'envoi.
 
-   ```ts
-   mailchimpAction: 'https://xxxx.us21.list-manage.com/subscribe/post?u=XXXXXXXXXXXX&id=YYYYYYYYYY',
-   ```
+### Ce qu'il faut récupérer dans Mailchimp
 
-4. Vérifier que l'audience Mailchimp contient bien les champs `FNAME` (prénom) et `LNAME` (nom), présents par défaut.
+1. **Une clé d'API** : menu du profil › *Profile › Extras › API keys › Create A Key*. Elle ressemble à `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us21` (la fin, `us21`, indique le serveur Mailchimp du compte).
+2. **L'identifiant de l'audience** : *Audience › All contacts › Settings › Audience name and defaults*, rubrique *Audience ID* (par ex. `a1b2c3d4e5`).
+3. Vérifier que l'audience a bien les champs `FNAME` (prénom) et `LNAME` (nom), présents par défaut (*Audience › Settings › Audience fields and *|MERGE|* tags*).
 
-Tant que `mailchimpAction` est vide, la page « Restez informés » invite simplement à écrire à la paroisse pour s'inscrire.
+### Où les mettre
 
-Après une inscription, Mailchimp ouvre sa propre page de confirmation dans un nouvel onglet (et envoie un e-mail de confirmation si le double opt-in est activé).
+Dans GitHub, *Settings › Secrets and variables › Actions*, onglet **Secrets** :
+
+| Nom | Valeur |
+| --- | --- |
+| `MAILCHIMP_API_KEY` | la clé d'API |
+| `MAILCHIMP_AUDIENCE_ID` | l'identifiant de l'audience |
+
+À chaque publication, la GitHub Action écrit ces valeurs dans `newsletter.config.php` sur le serveur. Ce fichier n'est jamais dans le dépôt, et le `.htaccess` en interdit l'accès depuis le web. Si les secrets sont absents, la publication fonctionne quand même (avec un avertissement dans l'onglet *Actions*), mais le formulaire affiche un message d'erreur.
+
+### Test
+
+Après la publication, s'inscrire depuis `https://saint-arnoux.fr/restez-informes/` :
+
+- la page « Vous êtes inscrit à la newsletter » doit s'afficher ;
+- la personne doit apparaître dans l'audience Mailchimp avec le statut *Subscribed* (et recevoir l'e-mail de bienvenue s'il est activé).
+
+En cas d'erreur, le formulaire affiche un message ; la cause (clé invalide, adresse refusée par Mailchimp…) est notée dans le journal d'erreurs PHP du cPanel (*Métriques › Erreurs*), sur une ligne commençant par `newsletter.php`.
+
+### Comportement
+
+- Une personne déjà inscrite peut se réinscrire sans erreur (ses prénom et nom sont mis à jour).
+- Une personne qui s'était désinscrite ne peut pas être réinscrite directement (règle de Mailchimp) : elle reçoit un e-mail de confirmation, et le site affiche la page `/newsletter/confirmation/` (« Plus qu'une étape ! ») qui le lui explique.
+- Une adresse marquée invalide par Mailchimp (*cleaned*) ne peut pas être réinscrite : le formulaire affiche le message d'erreur.
+- Même protection contre les robots que le formulaire de contact (champ caché et délai minimum de 3 secondes).
+- Les textes du formulaire et des messages sont dans `src/content/pages/restez-informes.md` (rubrique `newsletter`) `src/content/pages/newsletter-merci.md` et `src/content/pages/newsletter-confirmation.md`.
 
 ---
 
@@ -164,6 +185,6 @@ Facultatif, dans l'onglet **Variables** (ou en secret) :
 - [ ] Une adresse inexistante affiche la page « Cette page n'existe pas »
 - [ ] Le module messes.info s'affiche sur `/horaires/`
 - [ ] Un message envoyé depuis `/contact/` arrive bien à la paroisse
-- [ ] L'inscription à la newsletter apparaît dans l'audience Mailchimp
+- [ ] Une inscription à la newsletter apparaît dans l'audience Mailchimp (statut *Subscribed*)
 - [ ] Les liens d'inscription (Enoria) des pages Activités et Sacrements fonctionnent
 - [ ] Le livret PDF se télécharge

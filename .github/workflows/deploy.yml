@@ -4,6 +4,8 @@
 #   FTP_SERVER      serveur FTP, par ex. ftp.saint-arnoux.fr
 #   FTP_USERNAME    identifiant du compte FTP
 #   FTP_PASSWORD    mot de passe du compte FTP
+#   MAILCHIMP_API_KEY      clé d'API Mailchimp (newsletter)
+#   MAILCHIMP_AUDIENCE_ID  identifiant de l'audience Mailchimp
 # Facultatif (onglet « Variables » ou « Secrets ») :
 #   FTP_SERVER_DIR  dossier de destination, relatif au dossier d'arrivée du compte FTP (par défaut ./)
 
@@ -32,6 +34,20 @@ jobs:
       - run: npm ci
 
       - run: npm run build
+
+      # Configuration de public/newsletter.php, écrite uniquement sur le serveur
+      - name: Configuration Mailchimp
+        env:
+          MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+          MAILCHIMP_AUDIENCE_ID: ${{ secrets.MAILCHIMP_AUDIENCE_ID }}
+        run: |
+          if [ -z "$MAILCHIMP_API_KEY" ] || [ -z "$MAILCHIMP_AUDIENCE_ID" ]; then
+            echo "::warning::Secrets Mailchimp absents : le formulaire de newsletter ne fonctionnera pas."
+            exit 0
+          fi
+          [[ "$MAILCHIMP_API_KEY" =~ ^[A-Za-z0-9]+-[a-z]+[0-9]+$ ]] || { echo "::error::MAILCHIMP_API_KEY mal formée (attendu : xxxxxxxx-us21)"; exit 1; }
+          [[ "$MAILCHIMP_AUDIENCE_ID" =~ ^[A-Za-z0-9]+$ ]] || { echo "::error::MAILCHIMP_AUDIENCE_ID mal formé"; exit 1; }
+          printf "<?php\nreturn ['api_key' => '%s', 'audience_id' => '%s'];\n" "$MAILCHIMP_API_KEY" "$MAILCHIMP_AUDIENCE_ID" > dist/newsletter.config.php
 
       - name: Envoi par FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
