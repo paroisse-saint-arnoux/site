@@ -4,8 +4,8 @@
 #   FTP_SERVER      serveur FTP, par ex. ftp.saint-arnoux.fr
 #   FTP_USERNAME    identifiant du compte FTP
 #   FTP_PASSWORD    mot de passe du compte FTP
-# Variable facultative (onglet « Variables ») :
-#   FTP_SERVER_DIR  dossier de destination sur le serveur, par défaut public_html/
+# Facultatif (onglet « Variables » ou « Secrets ») :
+#   FTP_SERVER_DIR  dossier de destination, relatif au dossier d'arrivée du compte FTP (par défaut ./)
 
 name: Publication du site
 
@@ -41,6 +41,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           local-dir: ./dist/
-          server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}
+          server-dir: ${{ vars.FTP_SERVER_DIR || secrets.FTP_SERVER_DIR || './' }}
           exclude: |
             **/*:Zone.Identifier

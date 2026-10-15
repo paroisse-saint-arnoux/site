@@ -128,11 +128,11 @@ Onglet **Secrets** (*New repository secret*) :
 | `FTP_USERNAME` | identifiant du compte FTP |
 | `FTP_PASSWORD` | mot de passe du compte FTP |
 
-Onglet **Variables** (facultatif) :
+Facultatif, dans l'onglet **Variables** (ou en secret) :
 
 | Nom | Valeur |
 | --- | --- |
-| `FTP_SERVER_DIR` | dossier de destination, **avec un `/` final**. Par défaut `public_html/`. Si le compte FTP s'ouvre directement dans le dossier du site, mettre `./` |
+| `FTP_SERVER_DIR` | dossier de destination **relatif au dossier d'arrivée du compte FTP**, avec un `/` final. Par défaut `./` (le compte FTP s'ouvre directement dans le dossier du site). Si le compte s'ouvre dans le dossier personnel, mettre `public_html/` |
 
 ### c. Première publication
 
