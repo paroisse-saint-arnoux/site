@@ -34,7 +34,7 @@ agenda:
 permanences:
   surtitre: Accueil paroissial
   titre: Nous rencontrer
-  texte: Une équipe de bénévoles vous accueille au **Centre Saint Joseph**, 1104 route de Nice, 06650 Le Rouret.
+  texte: Une équipe de bénévoles vous accueille au **Centre Saint Joseph**, 1104 avenue de Nice, 06650 Le Rouret.
   note: Hors jours fériés et vacances scolaires.
 
 # Bloc « Saint Joseph 2 », le projet de nouvelle église au Rouret

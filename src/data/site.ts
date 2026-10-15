@@ -22,7 +22,7 @@ export const site = {
 
 export const contact = {
   place: 'Centre Saint Joseph',
-  street: '1104 route de Nice',
+  street: '1104 avenue de Nice',
   city: '06650 Le Rouret',
   phone: '04 93 77 28 33',
   phoneHref: 'tel:+33493772833',
@@ -32,10 +32,9 @@ export const contact = {
 
 // Permanences d'accueil (hors jours fériés et vacances scolaires)
 export const permanences = [
-  { day: 'Mardi', slots: ['14h – 16h', '17h – 19h'] },
-  { day: 'Mercredi', slots: ['15h30 – 17h30'] },
+  { day: 'Mardi', slots: ['10h – 12h'] },
+  { day: 'Mercredi', slots: ['10h – 12h'] },
   { day: 'Jeudi', slots: ['10h – 12h'] },
-  { day: 'Vendredi', slots: ['10h – 12h'] },
 ];
 
 export const channels = {

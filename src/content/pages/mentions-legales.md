@@ -5,7 +5,7 @@ titre: Mentions légales
 ## Éditeur du site
 
 Paroisse Saint Arnoux – Association diocésaine de Nice\
-Centre Saint Joseph, 1104 route de Nice, 06650 Le Rouret\
+Centre Saint Joseph, 1104 avenue de Nice, 06650 Le Rouret\
 Téléphone : 04 93 77 28 33 – E-mail : [paroisse.starnoux@nice.catholique.fr](mailto:paroisse.starnoux@nice.catholique.fr)
 
 ## Hébergement

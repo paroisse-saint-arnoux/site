@@ -171,7 +171,7 @@ Facultatif, dans l'onglet **Variables** (ou en secret) :
 
 ## 6. Autres réglages
 
-- **Horaires des messes (messes.info)** : le module affiché sur `/horaires/` est celui de la communauté `nc/06/saint-pierre-du-brusc`. Sur la fiche messes.info, mettre à jour le **site web** (`https://saint-arnoux.fr`) et vérifier l'**adresse** du Centre Saint Joseph (la fiche indique « 98 Route de Nice »).
+- **Horaires des messes (messes.info)** : le module affiché sur `/horaires/` est celui de la communauté `nc/06/saint-pierre-du-brusc`. Sur la fiche messes.info, mettre à jour le **site web** (`https://saint-arnoux.fr`) et vérifier l'**adresse** du Centre Saint Joseph (la fiche indique « 98 avenue de Nice »).
 - **Facebook et WhatsApp** : liens dans `src/data/site.ts` (`channels`).
 - **Coordonnées et permanences** : `src/data/site.ts` (`contact`, `permanences`) ; les mentions légales sont dans `src/content/pages/mentions-legales.md`.
 - **Livret paroissial** : remplacer le PDF dans `public/` et mettre à jour `livret` dans `src/data/site.ts`.
