@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
-import { channels, contact, livret, permanences, site } from '../data/site';
+import DioceseLogo from '../assets/logo/Logo Diocèse de Nice sans text - blanc.svg';
+import { channels, contact, diocese, livret, permanences, site } from '../data/site';
 ---
 
 <footer class="footer">
@@ -34,12 +35,18 @@ import { channels, contact, livret, permanences, site } from '../data/site';
       </ul>
     </div>
   </div>
-  <div class="wrap villages">
-    {site.villages.join(' · ')}
-  </div>
-  <div class="wrap legal">
-    <span>© {new Date().getFullYear()} {site.name} – Diocèse de Nice</span>
-    <a href="/mentions-legales/">Mentions légales</a>
+  <div class="wrap bottom">
+    <a class="diocese" href={diocese.url} target="_blank" rel="noopener" aria-label={diocese.name}>
+      <DioceseLogo aria-hidden="true" />
+    </a>
+    <div>
+      <p class="villages">{site.villages.join(' · ')}</p>
+      <div class="legal">
+        <span>© {new Date().getFullYear()} {site.name} –{' '}
+          <a href={diocese.url} target="_blank" rel="noopener">{diocese.name}</a></span>
+        <a href="/mentions-legales/">Mentions légales</a>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -87,10 +94,31 @@ import { channels, contact, livret, permanences, site } from '../data/site';
     text-decoration: none;
   }
 
-  .villages {
+  .bottom {
+    display: flex;
+    align-items: center;
+    gap: 20px;
     margin-top: 24px;
-    padding-top: 20px;
+    padding-block: 20px 28px;
     border-top: 1px solid rgb(255 255 255 / 15%);
+  }
+
+  .bottom > div {
+    flex: 1;
+  }
+
+  .diocese {
+    flex: none;
+  }
+
+  .diocese svg {
+    display: block;
+    width: 52px;
+    height: auto;
+  }
+
+  .villages {
+    margin: 0 0 8px;
     font-size: 0.9rem;
     color: #b7c4d3;
   }
@@ -100,7 +128,6 @@ import { channels, contact, livret, permanences, site } from '../data/site';
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 8px;
-    padding-block: 20px 28px;
     font-size: 0.85rem;
     color: #b7c4d3;
   }

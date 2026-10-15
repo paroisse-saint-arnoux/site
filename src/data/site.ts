@@ -37,6 +37,11 @@ export const permanences = [
   { day: 'Jeudi', slots: ['10h – 12h'] },
 ];
 
+export const diocese = {
+  name: 'Diocèse de Nice',
+  url: 'https://nice.catholique.fr/paroisse-saint-arnoux/',
+};
+
 export const channels = {
   facebook: 'https://www.facebook.com/saint.arnoux',
   whatsapp: 'https://chat.whatsapp.com/DCCE5OTwmPI0iyaTn9hJhs',

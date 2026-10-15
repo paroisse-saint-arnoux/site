@@ -10,7 +10,7 @@ const isActive = (href: string) => path === href || path.startsWith(href);
 <header class="header">
   <div class="wrap bar">
     <a class="brand" href="/" aria-label={`${site.name} – accueil`}>
-      <Logo class="brand-mark" viewBox="26 60 204 134" aria-hidden="true" />
+      <Logo class="brand-mark" aria-hidden="true" />
       <span>
         <strong>Paroisse Saint Arnoux</strong>
         <small>{site.tagline}</small>
@@ -75,7 +75,7 @@ const isActive = (href: string) => path === href || path.startsWith(href);
 
   .brand-mark {
     width: auto;
-    height: 52px;
+    height: 40px;
     flex: none;
   }
 

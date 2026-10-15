@@ -41,5 +41,6 @@ npm run preview   # serve dist/ (also a daemon; `npx astro preview stop`)
 
 - Astro collapses whitespace between a text line and a following inline tag on the next line; write `{' '}` before a link that starts a new line.
 - Icons: `components/Icon.astro` takes a lucide-static export name (`Clock`, `MapPin`…) or `facebook`/`whatsapp`/`mailchimp` (simple-icons), resolved at build time.
-- The header logo is the SVG from `src/assets/logo/`, imported as a component with a cropped `viewBox`; `public/favicon.svg` is a copy cropped to a square, so update it by hand if the logo changes.
+- The header logo is the SVG from `src/assets/logo/`, imported as a component (the file itself is cropped); `public/favicon.svg` is a copy cropped to a square (with a `prefers-color-scheme: dark` rule turning it white), so update it by hand if the logo changes, then regenerate `public/favicon.ico` (16/32/48, coloured) and `public/apple-touch-icon.png` (180×180, white logo on `--blue`) from it, e.g. with `sharp` + `magick`. The footer shows the white Diocèse de Nice logo the same way.
+- SVGs imported as components are inlined, so their `<style>` rules are global: exported files all use `.cls-1`, `.cls-2`… and override each other. Rename the classes with a unique prefix (the diocese logo uses `diocese-N`) and remove the `<title>` (otherwise shown as a tooltip).
 - The `*:Zone.Identifier` files that WSL creates are gitignored and excluded from the FTP deploy.

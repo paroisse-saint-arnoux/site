@@ -7,6 +7,10 @@
       .cls-3{fill:#c1c81b}
       .cls-4{fill:#85a1b1}
       .cls-5{fill:none}
+      /* Onglet en thème sombre : logo blanc sur fond transparent */
+      @media (prefers-color-scheme: dark) {
+        .cls-1, .cls-2, .cls-3, .cls-4{fill:#fff}
+      }
     </style>
   </defs>
   <g id="Asset_1" data-name="Asset 1">
