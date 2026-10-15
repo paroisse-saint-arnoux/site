@@ -5,7 +5,7 @@ import '@fontsource-variable/source-sans-3';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import { matomo, site } from '../data/site';
 
 interface Props {
   title?: string;
@@ -38,6 +38,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image:alt" content={`${site.name} : prêtres, diacres et servants d'autel réunis en plein air`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#1f3a5c" />
+    {
+      import.meta.env.PROD && (
+        <script is:inline define:vars={{ matomoUrl: matomo.url, matomoSiteId: matomo.siteId }}>
+          var _paq = (window._paq = window._paq || []);
+          // Aucun cookie : mesure d'audience exemptée de consentement (CNIL)
+          _paq.push(['disableCookies']);
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          _paq.push(['setTrackerUrl', matomoUrl + 'matomo.php']);
+          _paq.push(['setSiteId', matomoSiteId]);
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = matomoUrl + 'matomo.js';
+          document.head.appendChild(s);
+        </script>
+      )
+    }
   </head>
   <body>
     <a class="skip" href="#contenu">Aller au contenu</a>

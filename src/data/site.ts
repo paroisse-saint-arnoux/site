@@ -8,10 +8,10 @@ export const site = {
     'Paroisse catholique de Roquefort-les-Pins, Le Rouret, Opio, Châteauneuf-Grasse, Le Bar-sur-Loup, Gourdon, Cipières, Gréolières, Courmes et Pont-du-Loup.',
   villages: [
     'Roquefort-les-Pins',
-    'Le Rouret',
+    'Le Rouret',
     'Opio',
     'Châteauneuf-Grasse',
-    'Le Bar-sur-Loup',
+    'Le Bar-sur-Loup',
     'Pont-du-Loup',
     'Gourdon',
     'Courmes',
@@ -40,6 +40,12 @@ export const permanences = [
 export const channels = {
   facebook: 'https://www.facebook.com/saint.arnoux',
   whatsapp: 'https://chat.whatsapp.com/DCCE5OTwmPI0iyaTn9hJhs',
+};
+
+// Mesure d'audience (instance Matomo de la paroisse), chargée uniquement sur le site publié.
+export const matomo = {
+  url: 'https://matomo.saint-arnoux.fr/',
+  siteId: '2',
 };
 
 export const livret = {

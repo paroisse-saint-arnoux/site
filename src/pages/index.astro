@@ -41,7 +41,7 @@ const { data: page, Content } = await getPage('accueil');
     <div class="wrap hero-inner">
       <span class="eyebrow">{page.surtitre}</span>
       <h1>{page.titre}</h1>
-      <p class="lead">{site.villages.join(' · ')}</p>
+      <p class="lead">{site.villages.join(' · ')}</p>
       <div class="actions">
         <a class="btn btn--light" href="/horaires/"><Icon name="Clock" /> {page.bouton_horaires}</a>
         <a class="btn btn--ghost on-dark" href="/contact/"><Icon name="Phone" /> {page.bouton_contact}</a>
