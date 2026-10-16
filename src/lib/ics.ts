@@ -56,18 +56,22 @@ function nextDay(iso: string) {
 }
 
 /** « 10h30 » → 630 minutes ; undefined si l'heure n'est pas de cette forme */
-function minutes(time?: string) {
-  const m = time?.trim().match(/^(\d{1,2})\s*h\s*(\d{2})?$/i);
+function minutes(time: string) {
+  const m = time.trim().match(/^(\d{1,2})\s*h\s*(\d{2})?$/i);
   if (!m) return undefined;
   const value = Number(m[1]) * 60 + Number(m[2] ?? 0);
   return value < 24 * 60 ? value : undefined;
 }
 
-/** Heures de début et de fin (en minutes), si la date a une heure précise */
+/** Heures de début et de fin (en minutes) d'une date à heure précise :
+    « 20h » (une heure par défaut) ou une plage « 20h – 22h » */
 function eventTimes(item: AgendaItem) {
-  const start = item.end ? undefined : minutes(item.time);
-  // Durée inconnue : une heure par défaut
-  return start === undefined ? undefined : { start, end: Math.min(start + 60, 24 * 60 - 1) };
+  if (item.end || !item.time) return undefined;
+  const [from, to, ...rest] = item.time.split(/\s*(?:-|–|—|à)\s*/);
+  const start = minutes(from);
+  if (start === undefined || rest.length) return undefined;
+  const end = to === undefined ? Math.min(start + 60, 24 * 60 - 1) : minutes(to);
+  return end !== undefined && end > start ? { start, end } : undefined;
 }
 
 const hhmm = (value: number) => `${String(Math.floor(value / 60)).padStart(2, '0')}${String(value % 60).padStart(2, '0')}00`;

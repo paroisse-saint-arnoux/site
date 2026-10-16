@@ -13,7 +13,7 @@
 #   date     jour au format AAAA-MM-JJ, par ex. 2026-12-24
 #   fin      (facultatif) dernier jour, pour un événement sur plusieurs jours
 #   titre    ce qui se passe
-#   heure    (facultatif) par ex. 10h30
+#   heure    (facultatif) par ex. 10h30, ou début et fin : 20h – 22h
 #   lieu     (facultatif) par ex. Le Rouret
 #   messe    (facultatif) true = l'événement apparaît aussi dans
 #            « Messes et célébrations particulières » (page Horaires)
@@ -126,24 +126,34 @@ rubriques:
     dates:
       - date: 2026-09-26
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2026-10-10
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2026-11-07
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2026-12-05
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2027-01-09
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2027-02-13
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2027-03-20
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2027-04-10
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2027-05-15
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2027-06-12
         titre: Rencontre
+        heure: 10h – 17h
       - date: 2027-06-20
         titre: "Fête de fin d'année"
 
@@ -176,16 +186,22 @@ rubriques:
     dates:
       - date: 2026-10-04
         titre: Rencontre
+        heure: 10h30 – 11h30
       - date: 2026-11-22
         titre: Rencontre
+        heure: 10h30 – 11h30
       - date: 2027-01-31
         titre: Rencontre
+        heure: 10h30 – 11h30
       - date: 2027-02-14
         titre: Rencontre
+        heure: 10h30 – 11h30
       - date: 2027-03-14
         titre: Rencontre
+        heure: 10h30 – 11h30
       - date: 2027-05-09
         titre: Rencontre
+        heure: 10h30 – 11h30
       - date: 2027-06-20
         titre: "Fête de fin d'année"
 
@@ -274,20 +290,28 @@ rubriques:
     dates:
       - date: 2026-10-16
         titre: Soirée couples
+        heure: 20h – 23h
       - date: 2026-11-05
         titre: Avant le mariage
+        heure: 20h – 22h
       - date: 2026-11-12
         titre: Après le mariage
+        heure: 20h – 22h
       - date: 2026-12-03
         titre: Après le mariage
+        heure: 20h – 22h
       - date: 2026-12-10
         titre: Avant le mariage
+        heure: 20h – 22h
       - date: 2027-01-14
         titre: Avant le mariage
+        heure: 20h – 22h
       - date: 2027-01-21
         titre: Après le mariage
+        heure: 20h – 22h
       - date: 2027-02-12
         titre: Soirée couples – Saint-Valentin autrement
+        heure: 20h – 23h
       - date: 2027-02-14
         titre: Dimanche des amoureux
         heure: 10h30
@@ -297,10 +321,13 @@ rubriques:
         lieu: Antibes
       - date: 2027-03-18
         titre: Avant le mariage
+        heure: 20h – 22h
       - date: 2027-04-08
         titre: Avant le mariage
+        heure: 20h – 22h
       - date: 2027-05-13
         titre: Avant le mariage
+        heure: 20h – 22h
 
   - id: priere
     titre: Groupe de prière « Le Vent du Saint-Esprit »
@@ -308,26 +335,37 @@ rubriques:
     dates:
       - date: 2026-09-22
         titre: Groupe de prière
+        heure: 19h30
       - date: 2026-10-13
         titre: Groupe de prière
+        heure: 19h30
       - date: 2026-11-10
         titre: Groupe de prière
+        heure: 19h
       - date: 2026-12-15
         titre: Groupe de prière
+        heure: 19h
       - date: 2027-01-20
         titre: Groupe de prière (mercredi)
+        heure: 19h
       - date: 2027-02-23
         titre: Groupe de prière
+        heure: 19h
       - date: 2027-03-16
         titre: Groupe de prière
+        heure: 19h
       - date: 2027-04-20
         titre: Groupe de prière
+        heure: 19h30
       - date: 2027-05-18
         titre: Groupe de prière
+        heure: 19h30
       - date: 2027-06-15
         titre: Groupe de prière
+        heure: 19h30
       - date: 2027-07-20
         titre: Groupe de prière
+        heure: 19h30
 
   - id: formations
     titre: Formations
@@ -385,27 +423,38 @@ rubriques:
 
   - id: equipes
     titre: "Équipes d'animation"
-    intro: Le mercredi à 20h au Centre Saint Joseph.
+    intro: Le mercredi de 20h à 22h au Centre Saint Joseph.
     dates:
       - date: 2026-09-02
         titre: Équipe « Vision »
+        heure: 20h – 22h
       - date: 2026-09-09
         titre: "Équipe d'animation pastorale (EAP)"
+        heure: 20h – 22h
       - date: 2026-10-14
         titre: Équipe « Vision »
+        heure: 20h – 22h
       - date: 2026-11-04
         titre: EAP – préparation de l’Avent et de Noël
+        heure: 20h – 22h
       - date: 2026-12-09
         titre: Équipe « Vision »
+        heure: 20h – 22h
       - date: 2027-01-06
         titre: EAP
+        heure: 20h – 22h
       - date: 2027-02-03
         titre: Équipe « Vision »
+        heure: 20h – 22h
       - date: 2027-03-10
         titre: EAP
+        heure: 20h – 22h
       - date: 2027-04-07
         titre: Équipe « Vision »
+        heure: 20h – 22h
       - date: 2027-05-12
         titre: EAP
+        heure: 20h – 22h
       - date: 2027-06-16
         titre: Équipe « Vision »
+        heure: 20h – 22h
