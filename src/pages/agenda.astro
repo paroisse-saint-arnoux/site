@@ -4,16 +4,21 @@ import PageHeader from '../components/PageHeader.astro';
 import AgendaList from '../components/AgendaList.astro';
 import Icon from '../components/Icon.astro';
 import { agenda, year } from '../data/agenda';
-import { livret } from '../data/site';
+import { livret, site } from '../data/site';
 import { getPage } from '../lib/content';
 
 const { data: page } = await getPage('agenda');
+// Flux d'abonnement : toute l'année, mis à jour à chaque publication du site
+const subscription = { name: site.name, subscribe: true, icsFile: '/ics/agenda.ics' };
 ---
 
 <Base title={`Agenda ${year}`} description={page.description}>
   <PageHeader eyebrow={page.surtitre} title={page.titre} lead={page.intro}>
     <div class="actions">
       <a class="btn" href={livret.url}><Icon name="Download" /> {page.bouton_livret}</a>
+      <a class="btn btn--ghost" href="webcal://saint-arnoux.fr/ics/agenda.ics" data-atcb={JSON.stringify(subscription)}>
+        <Icon name="CalendarSync" /> {page.bouton_abonnement}
+      </a>
     </div>
   </PageHeader>
 
@@ -28,7 +33,7 @@ const { data: page } = await getPage('agenda');
             <section class="card" id={s.id}>
               <h2>{s.title}</h2>
               {s.intro && <p class="muted">{s.intro}</p>}
-              <AgendaList items={s.items} withYear />
+              <AgendaList items={s.items} withYear ics={`/ics/${s.id}.ics`} name={s.title} />
             </section>
           ))
         }
@@ -36,6 +41,10 @@ const { data: page } = await getPage('agenda');
     </div>
   </section>
 </Base>
+
+<script>
+  import '../lib/add-to-calendar';
+</script>
 
 <style>
   .chips {

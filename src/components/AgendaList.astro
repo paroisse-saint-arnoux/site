@@ -1,6 +1,9 @@
 ---
 import type { AgendaItem } from '../data/agenda';
 import { dayNumber, formatDate, itemDetails, monthShort } from '../lib/dates';
+import { calendarEvent, itemIcsUrl, upcomingItems } from '../lib/ics';
+import { site } from '../data/site';
+import Icon from './Icon.astro';
 
 interface Props {
   items: AgendaItem[];
@@ -9,9 +12,19 @@ interface Props {
   /** Nombre maximum de dates affichées (après masquage des dates passées) */
   limit?: number;
   withYear?: boolean;
+  /** Fichier .ics regroupant toutes les dates de la liste (bouton « Ajouter ces dates » sous la liste) */
+  ics?: string;
+  /** Nom de la liste, repris dans l'agenda de l'utilisateur */
+  name?: string;
 }
 
-const { items, hidePast = false, limit, withYear = false } = Astro.props;
+const { items, hidePast = false, limit, withYear = false, ics, name } = Astro.props;
+const upcoming = upcomingItems(items);
+const all = ics && {
+  name: name ? `${site.name} – ${name}` : site.name,
+  dates: upcoming.map(calendarEvent),
+  icsFile: ics,
+};
 ---
 
 <ol class="agenda-list" data-hide-past={hidePast ? '' : undefined} data-limit={limit}>
@@ -27,12 +40,26 @@ const { items, hidePast = false, limit, withYear = false } = Astro.props;
           <span class="what">{item.title}</span>
           {itemDetails(item) && <span class="where">{itemDetails(item)}</span>}
         </span>
+        <a class="add" href={itemIcsUrl(item)} data-atcb={JSON.stringify(calendarEvent(item))} title="Ajouter à mon agenda" aria-label={`Ajouter « ${item.title} » à mon agenda`}>
+          <Icon name="CalendarPlus" />
+        </a>
       </li>
     ))
   }
 </ol>
+{
+  all && upcoming.length > 0 && (
+    <p class="add-all">
+      <a class="btn btn--ghost" href={ics} data-atcb={JSON.stringify(all)}>
+        <Icon name="CalendarPlus" /> Ajouter ces dates à mon agenda
+      </a>
+    </p>
+  )
+}
 
 <script>
+  import '../lib/add-to-calendar';
+
   // Grise les dates passées (ou les masque si data-hide-past) à la date du jour.
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' }).format(new Date());
   document.querySelectorAll<HTMLOListElement>('.agenda-list').forEach((list) => {
@@ -45,6 +72,11 @@ const { items, hidePast = false, limit, withYear = false } = Astro.props;
       li.hidden = (past && hide) || shown >= limit;
       if (!li.hidden) shown++;
     });
+    // Plus aucune date à venir : inutile de proposer de les ajouter
+    const addAll = list.nextElementSibling;
+    if (addAll?.classList.contains('add-all') && !list.querySelector('li:not(.past):not([hidden])')) {
+      (addAll as HTMLElement).hidden = true;
+    }
   });
 </script>
 
@@ -116,5 +148,47 @@ const { items, hidePast = false, limit, withYear = false } = Astro.props;
   .where {
     font-size: 0.92rem;
     color: var(--ink-soft);
+  }
+
+  .add-all {
+    margin: 18px 0 0;
+    text-align: center;
+  }
+
+  .add-all[hidden] {
+    display: none;
+  }
+
+  .add-all .btn {
+    padding: 0.45em 1em;
+    font-size: 0.92rem;
+  }
+
+  /* Bouton discret, plus visible au survol de la date (toujours présent pour
+     les écrans tactiles) */
+  .add {
+    flex: none;
+    margin-left: auto;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--blue);
+    opacity: 0.55;
+    transition: opacity 0.15s, background 0.15s;
+  }
+
+  li:hover .add,
+  .add:focus-visible {
+    opacity: 1;
+  }
+
+  .add:hover {
+    background: var(--paper-2);
+  }
+
+  li.past .add {
+    display: none;
   }
 </style>

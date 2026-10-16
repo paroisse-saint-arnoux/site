@@ -123,7 +123,7 @@ const current = isSummer(new Date()) ? 'ete' : 'hiver';
         </div>
       </div>
       <div class="card">
-        {special.length ? <AgendaList items={special} hidePast withYear /> : <p>{page.particulieres.aucune}</p>}
+        {special.length ? <AgendaList items={special} hidePast withYear ics="/ics/messes.ics" name="Messes et célébrations particulières" /> : <p>{page.particulieres.aucune}</p>}
       </div>
     </div>
   </section>

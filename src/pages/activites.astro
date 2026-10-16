@@ -77,7 +77,7 @@ const familles = sectionById('messes-des-familles');
               </summary>
               <b.Content />
               {b.section.intro && <p class="muted small">{b.section.intro}</p>}
-              <AgendaList items={b.section.items} withYear />
+              <AgendaList items={b.section.items} withYear ics={`/ics/${b.section.id}.ics`} name={b.section.title} />
             </details>
           ))
         }
@@ -89,7 +89,7 @@ const familles = sectionById('messes-des-familles');
     <div class="wrap narrow">
       <h2>{page.familles.titre}</h2>
       <p class="muted">{page.familles.intro}</p>
-      <AgendaList items={familles.items} withYear />
+      <AgendaList items={familles.items} withYear ics={`/ics/${familles.id}.ics`} name={familles.title} />
     </div>
   </section>
 </Base>

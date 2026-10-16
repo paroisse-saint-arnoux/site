@@ -6,6 +6,10 @@ Options -Indexes
 </Files>
 ErrorDocument 404 /404.html
 
+# Fichiers d'agenda (boutons « Ajouter à mon agenda »)
+AddType text/calendar .ics
+AddCharset utf-8 .ics
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
