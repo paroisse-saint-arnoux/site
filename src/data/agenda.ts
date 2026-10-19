@@ -11,6 +11,8 @@ export type AgendaItem = {
   time?: string;
   place?: string;
   messe?: boolean;
+  /** Texte Markdown affiché sous la date tant qu'elle n'est pas passée */
+  programme?: string;
 };
 
 export type AgendaSection = {
@@ -63,6 +65,7 @@ export const agenda: AgendaSection[] = data.rubriques.map((raw: any, i: number) 
         time: text(d.heure, where, 'heure'),
         place: text(d.lieu, where, 'lieu'),
         messe: d.messe === true,
+        programme: text(d.programme, where, 'programme')?.trim(),
       };
     }),
   };

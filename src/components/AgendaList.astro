@@ -1,9 +1,10 @@
 ---
 import type { AgendaItem } from '../data/agenda';
-import { dayNumber, formatDate, itemDetails, monthShort } from '../lib/dates';
+import { dayNumber, formatDate, itemDetails, monthShort, todayIso } from '../lib/dates';
 import { calendarEvent, itemIcsUrl, upcomingItems } from '../lib/ics';
 import { site } from '../data/site';
 import Icon from './Icon.astro';
+import Markdown from './Markdown.astro';
 
 interface Props {
   items: AgendaItem[];
@@ -20,6 +21,7 @@ interface Props {
 
 const { items, hidePast = false, limit, withYear = false, ics, name } = Astro.props;
 const upcoming = upcomingItems(items);
+const today = todayIso();
 const all = ics && {
   name: name ? `${site.name} – ${name}` : site.name,
   dates: upcoming.map(calendarEvent),
@@ -35,11 +37,16 @@ const all = ics && {
           <span class="d">{dayNumber(item.date)}</span>
           <span class="m">{monthShort(item.date)}</span>
         </span>
-        <span class="body">
+        <div class="body">
           <span class="when">{formatDate(item, withYear)}</span>
           <span class="what">{item.title}</span>
           {itemDetails(item) && <span class="where">{itemDetails(item)}</span>}
-        </span>
+          {item.programme && (item.end ?? item.date) >= today && (
+            <div class="programme">
+              <Markdown text={item.programme} />
+            </div>
+          )}
+        </div>
         <a class="add" href={itemIcsUrl(item)} data-atcb={JSON.stringify(calendarEvent(item))} title="Ajouter à mon agenda" aria-label={`Ajouter « ${item.title} » à mon agenda`}>
           <Icon name="CalendarPlus" />
         </a>
@@ -103,6 +110,15 @@ const all = ics && {
     opacity: 0.45;
   }
 
+  /* Programme : la vignette et le bouton restent en haut */
+  li:has(.programme) {
+    align-items: flex-start;
+  }
+
+  li.past .programme {
+    display: none;
+  }
+
   .tile {
     flex: none;
     width: 52px;
@@ -148,6 +164,25 @@ const all = ics && {
   .where {
     font-size: 0.92rem;
     color: var(--ink-soft);
+  }
+
+  .programme {
+    margin-top: 6px;
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .programme :global(p),
+  .programme :global(ul) {
+    margin: 0 0 6px;
+  }
+
+  .programme :global(ul) {
+    padding-left: 1.2em;
+  }
+
+  .programme :global(:last-child) {
+    margin-bottom: 0;
   }
 
   .add-all {

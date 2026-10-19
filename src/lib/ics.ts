@@ -96,8 +96,21 @@ const timezone = [
   'END:VTIMEZONE',
 ];
 
+/** Programme en texte brut : « [Inscription](https://…) » → « Inscription : https://… » */
+const plain = (markdown: string) =>
+  markdown
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 : $2')
+    .replace(/\*\*|__/g, '')
+    .replace(/\n{2,}/g, '\n');
+
 const description = (item: AgendaItem, times = eventTimes(item)) =>
-  [!times && item.time ? `Heure : ${item.time}` : '', `${site.name} – https://saint-arnoux.fr/agenda/`].filter(Boolean).join('\n');
+  [
+    !times && item.time ? `Heure : ${item.time}` : '',
+    item.programme ? plain(item.programme) : '',
+    `${site.name} – https://saint-arnoux.fr/agenda/`,
+  ]
+    .filter(Boolean)
+    .join('\n');
 
 function event(item: AgendaItem, stamp: string) {
   const times = eventTimes(item);
