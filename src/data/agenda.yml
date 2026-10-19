@@ -42,7 +42,8 @@ rubriques:
       - date: 2026-11-14
         titre: Concert "Deo Gratias"
         lieu: Eglise de Chateauneuf
-        heure: 20h00
+        heure: 20h00 - 22h00
+        messe: false
         programme: |
           **Au programme**
 
