@@ -101,6 +101,7 @@ const plain = (markdown: string) =>
   markdown
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 : $2')
     .replace(/\*\*|__/g, '')
+    .replace(/<br\s*\/?>\n?/gi, '\n')
     .replace(/\n{2,}/g, '\n');
 
 const description = (item: AgendaItem, times = eventTimes(item)) =>
@@ -164,7 +165,8 @@ export function calendarEvent(item: AgendaItem) {
     ...(item.end && { endDate: item.end }),
     ...(times && { startTime: clock(times.start), endTime: clock(times.end) }),
     ...(item.place && { location: item.place }),
-    description: description(item, times),
+    // La bibliothèque supprime les vrais retours à la ligne et ne connaît que [br]
+    description: description(item, times).replace(/\n/g, '[br]'),
     uid: `${itemKey(item)}@saint-arnoux.fr`,
     icsFile: itemIcsUrl(item),
   };

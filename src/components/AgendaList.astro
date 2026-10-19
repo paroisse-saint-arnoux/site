@@ -43,7 +43,7 @@ const all = ics && {
           {itemDetails(item) && <span class="where">{itemDetails(item)}</span>}
           {item.programme && (item.end ?? item.date) >= today && (
             <div class="programme">
-              <Markdown text={item.programme} />
+              <Markdown text={item.programme} breaks />
             </div>
           )}
         </div>

@@ -1,16 +1,19 @@
 ---
 // Affiche un court texte Markdown venant de l'en-tête (front matter) d'un
 // fichier de src/content/. Les liens externes s'ouvrent dans un nouvel onglet.
+// Avec breaks, un simple retour à la ligne est conservé (sinon il faut une
+// ligne vide pour changer de paragraphe).
 import { marked } from 'marked';
 
 interface Props {
   text?: string;
   inline?: boolean;
+  breaks?: boolean;
 }
 
-const { text, inline = false } = Astro.props;
+const { text, inline = false, breaks = false } = Astro.props;
 const html = text
-  ? String(inline ? marked.parseInline(text) : marked.parse(text)).replace(
+  ? String(inline ? marked.parseInline(text, { breaks }) : marked.parse(text, { breaks })).replace(
       /<a href="(https?:[^"]+)"/g,
       '<a href="$1" target="_blank" rel="noopener"',
     )

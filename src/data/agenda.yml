@@ -19,7 +19,9 @@
 #            « Messes et célébrations particulières » (page Horaires)
 #   programme (facultatif) texte Markdown affiché sous la date tant qu'elle
 #            n'est pas passée (programme, liens d'inscription…), écrit après
-#            « programme: | » et décalé de 2 espaces de plus
+#            « programme: | » et décalé de 2 espaces de plus ; chaque
+#            retour à la ligne est conservé, une ligne vide sépare
+#            deux paragraphes
 #
 # Attention à l'indentation (2 espaces, jamais de tabulation). Si un titre
 # contient le caractère « : », mettez-le entre guillemets.
@@ -51,8 +53,8 @@ rubriques:
           - Stabat Mater – Pergolèse
           - Cantique de Jean Racine – Fauré
 
-          **Solistes** Solenne Dejouy et Nathalie Thibaudat<br>
-          **Piano** Alix Nguyen<br>
+          **Solistes** Solenne Dejouy et Nathalie Thibaudat
+          **Piano** Alix Nguyen
           et huit voix
       - date: 2026-11-29
         titre: Kermesse paroissiale
