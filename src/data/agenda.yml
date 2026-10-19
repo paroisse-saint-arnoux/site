@@ -39,6 +39,12 @@ rubriques:
         titre: Rentrée pastorale paroissiale – Journée des bâtisseurs
       - date: 2026-10-11
         titre: Fête patronale de la sainte Réparate – Diocèse de Nice
+      - date: 2026-10-16
+        titre: Soirée couples
+        heure: 20h – 23h  
+      - date: 2026-10-18
+        titre: Fête de la Courge
+        lieu: Chateauneuf
       - date: 2026-11-14
         titre: Concert "Deo Gratias"
         lieu: Eglise de Chateauneuf
@@ -63,11 +69,16 @@ rubriques:
       - date: 2027-02-10
         titre: Mercredi des Cendres
         messe: true
+      - date: 2027-02-12
+        titre: Soirée couples – Saint-Valentin autrement
+        heure: 20h – 23h
+        lieu: Auberge du Pont du Loup
       - date: 2027-02-14
         titre: Saint-Valentin – Messe des amoureux
         heure: 10h30
         lieu: Roquefort-les-Pins
         messe: true
+       
       - date: 2027-02-28
         titre: Scrutin des catéchumènes
       - date: 2027-03-07
