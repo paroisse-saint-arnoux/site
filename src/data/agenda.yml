@@ -61,6 +61,30 @@ rubriques:
           **Solistes** Solenne Dejouy et Nathalie Thibaudat<br>
           **Piano** Alix Nguyen<br>
           et huit voix
+      - date: 2026-10-31
+        titre: Toussaint – Messe et bénédiction des tombes
+        lieu: Cipières
+        heure: 16h00
+        messe: true
+        programme: |
+          - **Cipières** à 16h00 : messe suivie de la bénédiction des tombes
+      - date: 2026-11-01
+        titre: Toussaint – Messes et bénédiction des tombes
+        messe: true
+        programme: |
+          - **Opio** à 10h00 : messe suivie de la bénédiction des tombes
+          - **Roquefort-les-Pins** à 10h30 : messe suivie de la bénédiction des tombes au cimetière de Notre-Dame, puis à 15h00 bénédiction au cimetière du Pas de l'Aï
+          - **Le Bar-sur-Loup** à 10h30 : messe suivie de la bénédiction des tombes
+          - **Courmes** à 14h30 : bénédiction des tombes au cimetière
+          - **Le Rouret** à 15h00 : bénédiction des tombes au cimetière
+          - **Gréolières** à 16h00 : messe suivie de la bénédiction des tombes
+      - date: 2026-11-02
+        titre: Commémoration des fidèles défunts – Messes et bénédiction des tombes
+        heure: 10h30
+        messe: true
+        programme: |
+          - **Châteauneuf** à 10h30 : messe suivie de la bénédiction des tombes
+          - **Gourdon** à 10h30 : messe suivie de la bénédiction des tombes
       - date: 2026-11-29
         titre: Kermesse paroissiale
         lieu: Roquefort-les-Pins
