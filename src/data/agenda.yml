@@ -41,7 +41,7 @@ rubriques:
         titre: Fête patronale de la sainte Réparate – Diocèse de Nice
       - date: 2026-10-16
         titre: Soirée couples
-        heure: 20h – 23h  
+        heure: 20h – 23h
       - date: 2026-10-18
         titre: Fête de la Courge
         lieu: Chateauneuf
@@ -69,6 +69,15 @@ rubriques:
         programme: |
           - **Châteauneuf** à 10h30 : messe suivie de la bénédiction des tombes
           - **Gourdon** à 10h30 : messe suivie de la bénédiction des tombes
+      - date: 2026-11-07
+        titre: Récolte d'olives !
+        lieu: Nouveau terrain
+        heure: 9h00 - 17h00
+        messe: false
+        programme: |
+          ** RDV à 9h sur le nouveau terrain pour la récolte d'olives. **<br>
+          Prévoir gants, filets, caisses et échelles.<br>
+          N'oubliez pas votre pique-nique !
       - date: 2026-11-14
         titre: Concert "Deo Gratias"
         lieu: Eglise de Chateauneuf
@@ -102,7 +111,7 @@ rubriques:
         heure: 10h30
         lieu: Roquefort-les-Pins
         messe: true
-       
+
       - date: 2027-02-28
         titre: Scrutin des catéchumènes
       - date: 2027-03-07
