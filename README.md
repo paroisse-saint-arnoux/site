@@ -20,7 +20,7 @@ Tous les textes du site sont des fichiers Markdown (`.md`). Chaque fichier comme
 
 | Dossier | Contenu |
 | --- | --- |
-| `pages/` | Un fichier par page : `accueil.md`, `horaires.md` (dont les horaires d'été et d'hiver), `activites.md` (dont les liens d'inscription), `sacrements.md` (dont le casuel), `contact.md`, `restez-informes.md`, `mentions-legales.md`… |
+| `pages/` | Un fichier par page : `accueil.md`, `horaires.md` (dont les horaires d'été et d'hiver), `activites.md` (dont les liens d'inscription), `sacrements.md` (dont le casuel), `contact.md`, `restez-informes.md`, `jumelages.md`, `mentions-legales.md`… |
 | `sacrements/` | Une carte par sacrement (texte, icône, boutons) |
 | `activites/` | Une activité par fichier ; `rubrique` indique les dates de l'agenda à afficher |
 | `histoire/` | Une page d'histoire par fichier ; le nom du fichier donne l'adresse (`/histoire/<nom>/`) |
