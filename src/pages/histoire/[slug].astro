@@ -34,54 +34,8 @@ const description = article.data.resume.slice(0, 160).replace(/\s+\S*$/, '…');
 </Base>
 
 <style>
-  .histoire::after {
-    content: '';
-    display: block;
-    clear: both;
-  }
-
-  .histoire :global(figure) {
-    margin: 0.5rem 0 1.25rem;
-  }
-
-  .histoire :global(figure[data-align='left']),
-  .histoire :global(figure[data-align='right']) {
-    max-width: min(45%, 230px);
-  }
-
-  .histoire :global(figure[data-align='left']) {
-    float: left;
-    margin-right: 1.5rem;
-  }
-
-  .histoire :global(figure[data-align='right']) {
-    float: right;
-    margin-left: 1.5rem;
-  }
-
-  .histoire :global(figure[data-align='center']) {
-    clear: both;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .histoire :global(img) {
-    max-width: 100%;
-    height: auto !important;
-  }
-
   .histoire :global(h2) {
-    clear: both;
     margin-top: 2rem;
-  }
-
-  @media (max-width: 560px) {
-    .histoire :global(figure[data-align='left']),
-    .histoire :global(figure[data-align='right']) {
-      float: none;
-      margin-inline: 0;
-    }
   }
 
   hr {

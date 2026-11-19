@@ -1,16 +1,35 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
+import Carousel from '../components/Carousel.astro';
 import { getPage } from '../lib/content';
 
 const { data: page, Content } = await getPage('jumelages');
+const photos: { photo: string; description: string }[] = page.galerie ?? [];
 ---
 
 <Base title={page.titre} description={page.description}>
   <PageHeader eyebrow={page.surtitre} title={page.titre} lead={page.intro} />
   <section class="section">
-    <div class="wrap prose">
+    <div class="wrap prose jumelages">
       <Content />
+      {photos.length > 0 && <Carousel photos={photos} label="Photos du Burkina Faso" />}
     </div>
   </section>
 </Base>
+
+<style>
+  .jumelages {
+    --figure-float: 320px;
+  }
+
+  .jumelages :global(h2) {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 560px) {
+    .jumelages :global(figure[data-align]) {
+      max-width: 100%;
+    }
+  }
+</style>

@@ -27,7 +27,9 @@ Tous les textes du site sont des fichiers Markdown (`.md`). Chaque fichier comme
 
 Rappels Markdown : `**gras**`, `*italique*`, `[texte du lien](https://…)`, `## Intertitre`, une ligne vide entre deux paragraphes, `1.` ou `-` pour les listes.
 
-Images dans le texte (pages d'histoire) : `![description](/histoire/photo.jpg "Légende")`, placées dans `public/histoire/`. Ajouter `#gauche` ou `#droite` après le nom du fichier pour placer l'image à côté du texte : `![](/histoire/photo.jpg#droite "Légende")`.
+Images dans le texte (pages d'histoire, page des jumelages) : `![description](/histoire/photo.jpg "Légende")`, placées dans `public/histoire/` (ou `public/jumelages/`). Ajouter `#gauche` ou `#droite` après le nom du fichier pour placer l'image à côté du texte : `![](/histoire/photo.jpg#droite "Légende")`. Réduire les photos à 1600 px de large avant de les ajouter.
+
+Le carrousel en bas de la page des jumelages se règle dans la liste `galerie` de `pages/jumelages.md` (une photo de `public/jumelages/` et sa description, non affichée, par élément).
 
 Dans l'en-tête, mettre une phrase entre guillemets si elle contient « : ». Pour ajouter une carte (sacrement, activité, page d'histoire), copier un fichier existant et changer son contenu ; `ordre` fixe la position.
 
