@@ -96,12 +96,31 @@ rubriques:
           **Piano** Alix Nguyen<br>
           et huit voix
       - date: 2026-11-24
-        titre: Conférence une heure, une œuvre
-        heure: 19h – 20h
+        titre: "Conférence « Le sens des églises à la lumière de l’histoire et de la liturgie »"
+        heure: 19h30
         lieu: Centre Saint Joseph, Le Rouret
+        programme: |
+          **Avec Christel Naujoks**
+
+          Et si nos églises avaient bien plus à nous dire que leur simple beauté architecturale ?
+
+          Derrière chaque voûte, chaque mur et chaque objet se cache une intention précise : accueillir une célébration, guider les pas, éveiller le sacré. Car une église n’est pas qu’une prouesse technique, c’est avant tout la mise en espace de la liturgie.
+
+          Embarquez pour un voyage passionnant à travers les siècles ! Des premières basiliques aux églises contemporaines, partez à la découverte d’édifices emblématiques pour comprendre ce qui donne tout leur sens à nos églises.
       - date: 2026-11-29
         titre: Kermesse paroissiale
-        lieu: Roquefort-les-Pins
+        lieu: Salle Charvet, Roquefort-les-Pins
+        programme: |
+          Notre kermesse paroissiale se tiendra le dimanche 29 novembre, salle Charvet à Roquefort.
+
+          **Pensez à vous inscrire pour le repas !** [Formulaire d'inscription](https://forms.gle/ApZpZn4Fz5bmPDES8) (20 € par personne)
+
+          Au menu cette année :
+
+          - Exposition des maquettes des 5 architectes en lice pour le projet du centre paroissial
+          - Grand repas partagé : 20 € par personne, sur inscription !
+          - Vide-grenier, jeux et jouets, etc.
+          - Vente d'huile d'olive des Bâtisseurs ([lien de pré-commande](https://saint-joseph.saint-arnoux.fr/commande-huile))
       - date: 2026-12-01
         titre: Conférence une heure, une œuvre
         heure: 19h – 20h
@@ -459,8 +478,17 @@ rubriques:
         titre: Formation liturgique
         heure: 20h
       - date: 2026-11-24
-        titre: "L'église, un livre de pierre : introduction à l'architecture sacrée"
+        titre: "Conférence « Le sens des églises à la lumière de l’histoire et de la liturgie »"
         heure: 19h30
+        lieu: Centre Saint Joseph, Le Rouret
+        programme: |
+          **Avec Christel Naujoks**
+
+          Et si nos églises avaient bien plus à nous dire que leur simple beauté architecturale ?
+
+          Derrière chaque voûte, chaque mur et chaque objet se cache une intention précise : accueillir une célébration, guider les pas, éveiller le sacré. Car une église n’est pas qu’une prouesse technique, c’est avant tout la mise en espace de la liturgie.
+
+          Embarquez pour un voyage passionnant à travers les siècles ! Des premières basiliques aux églises contemporaines, partez à la découverte d’édifices emblématiques pour comprendre ce qui donne tout leur sens à nos églises.
       - date: 2026-12-01
         titre: "L'église, un livre de pierre : « Une heure, une œuvre »"
         heure: 19h30
@@ -500,7 +528,18 @@ rubriques:
         heure: 19h
       - date: 2026-11-29
         titre: Kermesse paroissiale
-        lieu: Roquefort-les-Pins
+        lieu: Salle Charvet, Roquefort-les-Pins
+        programme: |
+          Notre kermesse paroissiale se tiendra le dimanche 29 novembre, salle Charvet à Roquefort.
+
+          **Pensez à vous inscrire pour le repas !** [Formulaire d'inscription](https://forms.gle/ApZpZn4Fz5bmPDES8) (20 € par personne)
+
+          Au menu cette année :
+
+          - Exposition des maquettes des 5 architectes en lice pour le projet du centre paroissial
+          - Grand repas partagé : 20 € par personne, sur inscription !
+          - Vide-grenier, jeux et jouets, etc.
+          - Vente d'huile d'olive des Bâtisseurs ([lien de pré-commande](https://saint-joseph.saint-arnoux.fr/commande-huile))
 
   - id: equipes
     titre: "Équipes d'animation"
