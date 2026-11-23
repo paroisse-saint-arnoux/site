@@ -122,9 +122,13 @@ rubriques:
           - Vide-grenier, jeux et jouets, etc.
           - Vente d'huile d'olive des Bâtisseurs ([lien de pré-commande](https://saint-joseph.saint-arnoux.fr/commande-huile))
       - date: 2026-12-01
-        titre: Conférence une heure, une œuvre
+        titre: "Conférence « La Nativité : ce que la peinture nous dit de Dieu »"
         heure: 19h30
         lieu: Centre Saint Joseph, Le Rouret
+        programme: |
+          **Parlons d'Art & Foi : la Nativité dans la peinture**, avec Christel Naujoks, déléguée à la Culture du diocèse de Nice.
+
+          Participation libre. Inscription conseillée sur le [site de L'Abside](https://abside-culture.fr/agenda/la-nativite-ce-que-la-peinture-nous-dit-de-dieu).
       - date: 2026-12-08
         titre: Messe de l'immaculée conception (à la bougie)
         messe: true
@@ -490,8 +494,13 @@ rubriques:
 
           Embarquez pour un voyage passionnant à travers les siècles ! Des premières basiliques aux églises contemporaines, partez à la découverte d’édifices emblématiques pour comprendre ce qui donne tout leur sens à nos églises.
       - date: 2026-12-01
-        titre: "L'église, un livre de pierre : « Une heure, une œuvre »"
+        titre: "Conférence « La Nativité : ce que la peinture nous dit de Dieu »"
         heure: 19h30
+        lieu: Centre Saint Joseph, Le Rouret
+        programme: |
+          **Parlons d'Art & Foi : la Nativité dans la peinture**, avec Christel Naujoks, déléguée à la Culture du diocèse de Nice.
+
+          Participation libre. Inscription conseillée sur le [site de L'Abside](https://abside-culture.fr/agenda/la-nativite-ce-que-la-peinture-nous-dit-de-dieu).
       - date: 2027-01-12
         titre: Parcours « Repères pour croire »
         heure: 19h30
