@@ -27,3 +27,5 @@ casuel:
 Le casuel est l'offrande faite à l'occasion des baptêmes, mariages et obsèques. Cette participation permet à la paroisse de couvrir les frais occasionnés par l'ouverture de l'église lors de ces célébrations (électricité, chauffage, nettoyage…) ainsi que les frais de préparation.
 
 Les montants minimum sont fixés par [notre diocèse](https://donnons-nice.catholique.fr/les-casuels/) ; vous pouvez les compléter d'un don pour la paroisse. Ces montants ne rémunèrent pas les paroissiens qui vous accompagnent dans la préparation des sacrements : ils sont tous bénévoles.
+
+Tout au long de l'année, vous pouvez aussi soutenir la paroisse en [donnant au denier de l'Église](https://donnons-nice.catholique.fr/le-denier-de-leglise/mon-don-au-denier/?par=1014&utm_source=pages-paroisses&utm_medium=formulaire-dons&utm_campaign=site-starnoux&utm_id=site-web-starnoux).

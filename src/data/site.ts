@@ -42,6 +42,12 @@ export const diocese = {
   url: 'https://nice.catholique.fr/paroisse-saint-arnoux/',
 };
 
+// Don au denier de l'Église, en ligne sur le site du diocèse (par=1014 : la paroisse Saint Arnoux)
+export const denier = {
+  title: "Donner au denier de l'Église",
+  url: 'https://donnons-nice.catholique.fr/le-denier-de-leglise/mon-don-au-denier/?par=1014&utm_source=pages-paroisses&utm_medium=formulaire-dons&utm_campaign=site-starnoux&utm_id=site-web-starnoux',
+};
+
 export const channels = {
   facebook: 'https://www.facebook.com/saint.arnoux',
   whatsapp: 'https://chat.whatsapp.com/DCCE5OTwmPI0iyaTn9hJhs',
@@ -63,6 +69,6 @@ export const nav = [
   { href: '/agenda/', label: 'Agenda' },
   { href: '/activites/', label: 'Activités' },
   { href: '/sacrements/', label: 'Sacrements' },
-  { href: '/histoire/', label: 'Histoire' },
+  { href: '/histoire/', label: 'Paroisse' },
   { href: '/contact/', label: 'Contact' },
 ];

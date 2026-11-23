@@ -27,6 +27,8 @@ AddCharset utf-8 .ics
   RewriteRule ^2022/11/leglise-notre-dame-de-canlache/?$ /histoire/notre-dame-de-canlache/ [L,R=301]
   RewriteRule ^2022/11/leglise-notre-dame-du-brusc/?$ /histoire/notre-dame-du-brusc/ [L,R=301]
   RewriteRule ^2022/11/anton-prinner/?$ /histoire/anton-prinner/ [L,R=301]
+  # Ancienne page des jumelages, devenue un article de la page « Paroisse »
+  RewriteRule ^jumelages/?$ /histoire/jumelages/ [L,R=301]
 </IfModule>
 
 <IfModule mod_headers.c>

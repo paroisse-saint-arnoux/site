@@ -33,6 +33,8 @@ const histoire = defineCollection({
     ordre: z.number(),
     image: z.string(),
     resume: z.string(),
+    // Carrousel de photos en bas de l'article (facultatif)
+    galerie: z.array(z.object({ photo: z.string(), description: z.string() })).optional(),
   }),
 });
 

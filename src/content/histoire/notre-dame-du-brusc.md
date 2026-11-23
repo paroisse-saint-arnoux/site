@@ -2,7 +2,7 @@
 titre: "L’église Notre-Dame du Brusc"
 ordre: 2
 image: /histoire/brusc-1.jpg
-# Résumé affiché sur la page « Histoire »
+# Résumé affiché sur la page « Paroisse »
 resume: "L’église Notre-Dame du Brusc est une église catholique située à Châteauneuf-Grasse, en France. L’église est située dans le département français des Alpes-Maritimes, sur la commune de Châteauneuf-Grasse, au 129A, chemin de Notre-Dame-du-Brusc. Elle se trouve sur le plateau de Valbonne, à la limite méridionale d’une petite plaine que dominent au nord le village de Châteauneuf-Grasse. Le lieu possède plusieurs sources dont l’une d’elles se trouvait sous l’église. Il est possible que le nom de Brusc venait du provençal et…"
 ---
 

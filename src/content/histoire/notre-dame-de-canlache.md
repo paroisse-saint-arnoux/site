@@ -2,7 +2,7 @@
 titre: "L’église Notre-Dame de Canlache"
 ordre: 1
 image: /histoire/canlache-1.jpg
-# Résumé affiché sur la page « Histoire »
+# Résumé affiché sur la page « Paroisse »
 resume: "Notre-Dame de Canlache apparait dans les archives dès 1351 où elle n’était alors qu’une simple chapelle. Après le moyen âge, elle ne faisait toujours pas l’unanimité au sein du clergé. Les premiers évêques de Grasse qui se succédèrent lors de sa visite au cours du XVIIe siècle, n’eurent que peu d’éloges à son égard. En 1623, Mgr Barcicault, outré par l’absence de cloche dans le clocher alla même jusqu’à…"
 ---
 

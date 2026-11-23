@@ -54,7 +54,7 @@ saint_joseph:
       libelle: livraison prévue
   lien: https://saint-joseph.saint-arnoux.fr/
   bouton_projet: Découvrir le projet
-  lien_don: https://don-nice.catholique.fr/centre-paroissial-st-arnoux-rouret/
+  lien_don: https://saint-joseph.saint-arnoux.fr/don
   bouton_don: Faire un don
   photo: Esquisse du futur ensemble paroissial Saint-Joseph, avec l'église, son clocher et le centre paroissial autour du parvis
 
@@ -62,6 +62,16 @@ canaux:
   surtitre: Restez informés
   titre: Ne manquez aucune nouvelle de la paroisse
   intro: "Trois façons de suivre la vie de la paroisse : choisissez celle qui vous convient."
+
+# Bloc « Denier de l'Église » en bas de la page (le lien est dans src/data/site.ts)
+denier:
+  surtitre: Soutenir la paroisse
+  titre: Le denier de l'Église
+  texte: |
+    L'Église ne vit que des dons des fidèles : elle ne reçoit aucune subvention de l'État ni du Vatican. Le denier permet de faire vivre les prêtres et de rémunérer les laïcs salariés qui servent la paroisse et le diocèse.
+
+    Chacun donne selon ses moyens ; votre don est déductible de vos impôts à hauteur de 66 %.
+  bouton: Donner au denier
 
 # Le texte de ce bloc est sous l'en-tête, après la ligne ---
 jeunes:

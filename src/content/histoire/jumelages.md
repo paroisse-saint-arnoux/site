@@ -1,8 +1,9 @@
 ---
-titre: Jumelages avec le Burkina Faso
-surtitre: Solidarité
-intro: "La paroisse Saint Arnoux est jumelée avec deux paroisses du Burkina Faso : Dano, avec l'association « Le Manguier de la Paix », et Saint-Michel de Nako, avec l'association « Château-Nako »."
-description: "Les jumelages de la paroisse Saint Arnoux avec les paroisses de Dano et de Nako au Burkina Faso : les associations « Le Manguier de la Paix » et « Château-Nako »."
+titre: "Jumelages avec le Burkina Faso"
+ordre: 4
+image: /jumelages/eglise-assemblee.jpg
+# Résumé affiché sur la page « Paroisse »
+resume: "La paroisse Saint Arnoux est jumelée avec deux paroisses du Burkina Faso : Dano, avec l'association « Le Manguier de la Paix », et Saint-Michel de Nako, avec l'association « Château-Nako »."
 # Photos du carrousel en bas de page (fichiers dans public/jumelages/),
 # dans l'ordre d'affichage. « description » n'est pas affichée : elle
 # décrit la photo pour les malvoyants et les moteurs de recherche.
@@ -30,6 +31,8 @@ galerie:
   - photo: /jumelages/route.jpg
     description: Sur la route
 ---
+
+La paroisse Saint Arnoux est jumelée avec deux paroisses du Burkina Faso : Dano, avec l'association « Le Manguier de la Paix », et Saint-Michel de Nako, avec l'association « Château-Nako ».
 
 ![Un homme à vélo transportant une pile de bidons jaunes](/jumelages/velo-bidons.jpg#droite)
 

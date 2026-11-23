@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="26 26 204 204">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="10 10 236 236">
   <defs>
     <style>
       .cls-1{fill:#385463}
@@ -7,12 +7,10 @@
       .cls-3{fill:#c1c81b}
       .cls-4{fill:#85a1b1}
       .cls-5{fill:none}
-      /* Onglet en thème sombre : logo blanc sur fond transparent */
-      @media (prefers-color-scheme: dark) {
-        .cls-1, .cls-2, .cls-3, .cls-4{fill:#fff}
-      }
     </style>
   </defs>
+  <!-- Fond blanc arrondi : le logo reste lisible avec un thème clair comme sombre -->
+  <rect x="10" y="10" width="236" height="236" rx="44" fill="#fff"/>
   <g id="Asset_1" data-name="Asset 1">
     <g>
       <g>

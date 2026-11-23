@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import DioceseLogo from '../assets/logo/Logo Diocèse de Nice sans text - blanc.svg';
-import { channels, contact, diocese, livret, permanences, site } from '../data/site';
+import { channels, contact, denier, diocese, livret, permanences, site } from '../data/site';
 ---
 
 <footer class="footer">
@@ -17,7 +17,9 @@ import { channels, contact, diocese, livret, permanences, site } from '../data/s
         <a href={contact.phoneHref}>{contact.phone}</a><br />
         <a href={`mailto:${contact.email}`}>{contact.email}</a>
       </p>
-      <p><a href="/jumelages/">Nos jumelages au Burkina Faso</a></p>
+      <p>
+        <a class="btn btn--light denier" href={denier.url} target="_blank" rel="noopener"><Icon name="Heart" /> {denier.title}</a>
+      </p>
     </div>
     <div>
       <h2>Permanences d'accueil</h2>
@@ -82,6 +84,18 @@ import { channels, contact, diocese, livret, permanences, site } from '../data/s
     list-style: none;
     padding: 0;
     margin: 0 0 1em;
+  }
+
+  /* Bouton du denier : « .footer a » imposerait sinon le texte blanc */
+  .footer .denier {
+    color: var(--blue-dark);
+    margin-top: 0.5rem;
+  }
+
+  .footer .denier:hover {
+    background: #f3d79b;
+    border-color: #f3d79b;
+    color: var(--blue-dark);
   }
 
   .social li {

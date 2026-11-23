@@ -20,16 +20,16 @@ Tous les textes du site sont des fichiers Markdown (`.md`). Chaque fichier comme
 
 | Dossier | Contenu |
 | --- | --- |
-| `pages/` | Un fichier par page : `accueil.md`, `horaires.md` (dont les horaires d'été et d'hiver), `activites.md` (dont les liens d'inscription), `sacrements.md` (dont le casuel), `contact.md`, `restez-informes.md`, `jumelages.md`, `mentions-legales.md`… |
+| `pages/` | Un fichier par page : `accueil.md`, `horaires.md` (dont les horaires d'été et d'hiver), `activites.md` (dont les liens d'inscription), `sacrements.md` (dont le casuel), `contact.md`, `restez-informes.md`, `mentions-legales.md`… |
 | `sacrements/` | Une carte par sacrement (texte, icône, boutons) |
 | `activites/` | Une activité par fichier ; `rubrique` indique les dates de l'agenda à afficher |
-| `histoire/` | Une page d'histoire par fichier ; le nom du fichier donne l'adresse (`/histoire/<nom>/`) |
+| `histoire/` | Un article de la page « Paroisse » par fichier (histoire, jumelages…) ; le nom du fichier donne l'adresse (`/histoire/<nom>/`) |
 
 Rappels Markdown : `**gras**`, `*italique*`, `[texte du lien](https://…)`, `## Intertitre`, une ligne vide entre deux paragraphes, `1.` ou `-` pour les listes.
 
-Images dans le texte (pages d'histoire, page des jumelages) : `![description](/histoire/photo.jpg "Légende")`, placées dans `public/histoire/` (ou `public/jumelages/`). Ajouter `#gauche` ou `#droite` après le nom du fichier pour placer l'image à côté du texte : `![](/histoire/photo.jpg#droite "Légende")`. Réduire les photos à 1600 px de large avant de les ajouter.
+Images dans le texte (articles de la page « Paroisse ») : `![description](/histoire/photo.jpg "Légende")`, placées dans `public/histoire/` (ou `public/jumelages/`). Ajouter `#gauche` ou `#droite` après le nom du fichier pour placer l'image à côté du texte : `![](/histoire/photo.jpg#droite "Légende")`. Réduire les photos à 1600 px de large avant de les ajouter.
 
-Le carrousel en bas de la page des jumelages se règle dans la liste `galerie` de `pages/jumelages.md` (une photo de `public/jumelages/` et sa description, non affichée, par élément).
+Le carrousel en bas de la page des jumelages se règle dans la liste `galerie` de `histoire/jumelages.md` (une photo de `public/jumelages/` et sa description, non affichée, par élément). Tout article de la page « Paroisse » peut avoir sa propre `galerie`.
 
 Dans l'en-tête, mettre une phrase entre guillemets si elle contient « : ». Pour ajouter une carte (sacrement, activité, page d'histoire), copier un fichier existant et changer son contenu ; `ordre` fixe la position.
 
@@ -38,7 +38,7 @@ Dans l'en-tête, mettre une phrase entre guillemets si elle contient « : ». Po
 | Fichier | Contenu |
 | --- | --- |
 | `agenda.yml` | Calendrier pastoral de l'année (repris du livret paroissial) – mode d'emploi en tête du fichier |
-| `site.ts` | Coordonnées, permanences, liens Facebook / WhatsApp, menu |
+| `site.ts` | Coordonnées, permanences, liens Facebook / WhatsApp, lien du denier de l'Église, menu |
 
 - **Horaires des messes** : les horaires habituels sont dans `src/content/pages/horaires.md` (la saison en cours est mise en avant automatiquement au changement d'heure). En dessous, le widget de [messes.info](https://messes.info/communaute/nc/06/saint-pierre-du-brusc) affiche le détail des prochaines célébrations, à tenir à jour sur messes.info.
 - Dans `agenda.yml`, `messe: true` fait apparaître un événement dans « Messes et célébrations particulières » (page Horaires), et les rubriques `accueil: true` alimentent « Prochains rendez-vous » sur l'accueil. Le champ facultatif `programme` (texte Markdown : listes, gras, liens d'inscription) s'affiche sous la date dans toutes les listes, tant qu'elle n'est pas passée. Les dates passées sont grisées ou masquées automatiquement dans le navigateur, sans avoir à reconstruire le site. Une erreur de saisie (date mal écrite, champ manquant) fait échouer `npm run build` avec un message indiquant la ligne en cause.

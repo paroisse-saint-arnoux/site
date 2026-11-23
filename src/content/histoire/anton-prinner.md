@@ -2,7 +2,7 @@
 titre: "Anton Prinner"
 ordre: 3
 image: /histoire/prinner-1.png
-# Résumé affiché sur la page « Histoire »
+# Résumé affiché sur la page « Paroisse »
 resume: "Saviez-vous qui se cache derrière les grandes peintures de la fresque de l’église Notre Dame à Roquefort ? Voici une copie d’un article de Libération publié il y a quelques années sur le personnage – vous trouverez aussi quelques informations sur sa page wikipedia et des oeuvres sur Google (il/elle était surtout sculpteur). C’était une amie du curé le père Thomasson à l’époque. ANTON PRINNER, ENTRE MYSTÈRE ET ÉSOTÉRISME Par Florence La Bruyère— 7 mai 2007 à 07:36…"
 ---
 

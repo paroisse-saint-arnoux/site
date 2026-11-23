@@ -6,7 +6,7 @@ import Channels from '../components/Channels.astro';
 import AgendaList from '../components/AgendaList.astro';
 import Markdown from '../components/Markdown.astro';
 import { agenda } from '../data/agenda';
-import { contact, livret, permanences, site } from '../data/site';
+import { contact, denier, livret, permanences, site } from '../data/site';
 import { todayIso } from '../lib/dates';
 import { getPage } from '../lib/content';
 import hero from '../assets/photos/pretres-enfants-de-choeur.jpg';
@@ -154,6 +154,19 @@ const { data: page, Content } = await getPage('accueil');
       </div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="wrap denier">
+      <span class="eyebrow">{page.denier.surtitre}</span>
+      <h2>{page.denier.titre}</h2>
+      <Markdown text={page.denier.texte} />
+      <div class="actions">
+        <a class="btn" href={denier.url} target="_blank" rel="noopener">
+          <Icon name="Heart" /> {page.denier.bouton} <Icon name="ExternalLink" />
+        </a>
+      </div>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -277,6 +290,15 @@ const { data: page, Content } = await getPage('accueil');
 
   .perm td {
     padding: 4px 0;
+  }
+
+  .denier {
+    max-width: 720px;
+    text-align: center;
+  }
+
+  .denier .actions {
+    justify-content: center;
   }
 
   .rounded {
